@@ -230,6 +230,8 @@ ostream &operator << (ostream &os, Vector v)
 	return os;
 }
 
+#include "vector-templatefunctions.hpp"
+
 #ifdef HEADER_ONLY
 	#include "vector.cpp"
 #endif

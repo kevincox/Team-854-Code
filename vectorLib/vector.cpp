@@ -1,6 +1,3 @@
-#ifndef VECTOR_CPP___MATH_VECTOR_LIBRARY
-#define VECTOR_CPP___MATH_VECTOR_LIBRARY
-
 #include "vector.hpp"
 
 double Vector::bir (double a) const
@@ -172,33 +169,7 @@ void Vector::operator-= (Vector v)
 	y -= v.y;
 }
 
-template <class T> Vector Vector::operator * (T m) const
-{
-	Vector r(xy, x * m, y * m);
-	return r;
-}
-
-template <class T> void Vector::operator *= (T m)
-{
-	x *= m;
-	y *= m;
-}
-
-template <class T> Vector Vector::operator / (T m) const
-{
-	Vector r(xy, x / m, y / m);
-	return r;
-}
-
-template <class T> void Vector::operator /= (T m)
-{
-	x /= m;
-	y /= m;
-}
-
 void Vector::info()
 {
 	printf("(%lf,%lf) Magnitude: %lf Direction: %lf (%lf degrees)\n", x, y, getMagnitude(), getDirection(), getDirectionDegrees());
 }
-
-#endif
