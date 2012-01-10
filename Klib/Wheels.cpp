@@ -1,17 +1,25 @@
-/*class Motor
+/*
+#include <Jaguar.h>
+#include <Victor.h>
+
+class Motor
 {
+	enum motorControllerType {
+		jaguar,
+		victor,
+		undefined
+	};
 	private:
-		motorControlerType type;
+		motorControllerType type;
 		union
 		{
-			int jag;
-			//Jaguar jag;
-			//Victor vic;
+			Jaguar *jag;
+			Victor *vic;
 		};
 		double mod;
 
 	public:
-		Motor ( motorControlerType type, unsigned int slot, unsigned int channel, double modifier)
+		Motor ( motorControllerType type, unsigned int slot, unsigned int channel, double modifier)
 		{
 			this->type = type;
 			this->mod = modifier;
@@ -19,10 +27,10 @@
 			switch (type)
 			{
 				case jaguar:
-					//this->jag = new Jaguar(slot, channel);
+					this->jag = new Jaguar(slot, channel);
 					break;
 				case victor:
-					//this->vic = new Victor(slot, channel);
+					this->vic = new Victor(slot, channel);
 					break;
 				default:
 					this->type = undefined;
@@ -36,10 +44,10 @@
 			switch (type)
 			{
 				case jaguar:
-					//jag.Set(value);
+					jag->Set(value);
 					break;
 				case victor:
-					//vic.Set(value);
+					vic->Set(value);
 					break;
 			}
 		}
@@ -48,15 +56,15 @@
 			switch (type)
 			{
 				case jaguar:
-					//return jag.Get();
+					return jag->Get();
 				case victor:
-					//return vic.Get();
+					return vic->Get();
 					return 0;
 			}
 		}
 
 		void enableDeadbandElimination ( bool enable )
 		{
-			//if ( type == victor ) vic.EnableDeadbandElimination(enable);
+			if ( type == victor ) vic->EnableDeadbandElimination(enable);
 		}
 };*/
