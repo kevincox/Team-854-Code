@@ -1,5 +1,3 @@
-/* Evan wrote this. */
-
 /*class Motor
 {
 	private:
