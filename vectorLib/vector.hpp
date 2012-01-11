@@ -1,6 +1,7 @@
 /** \file vector.h
     \brief Main header file
 */
+#define VECTOR_H___MATH_VECTOR_LIBRARY
 
 #ifndef VECTOR_H___MATH_VECTOR_LIBRARY
 #define VECTOR_H___MATH_VECTOR_LIBRARY
