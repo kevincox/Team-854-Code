@@ -25,6 +25,8 @@
 
 class Vector
 {
+	double x;
+	double y;
 
 	/** \internal
 		\brief Bring angle into range
@@ -62,7 +64,9 @@ class Vector
 		\param rad An angle in radian measure to be converted to degrees
 		\return The measure of \a rad in degrees.
 	*/
-	double todeg (double d) const;
+
+public:	
+	static double todeg (double d) const;
 	/**	\internal
 		\brief Convert degrees to radians
 
@@ -71,11 +75,7 @@ class Vector
 		\param rad An angle in degree measure to be converted to radians
 		\return The measure of \a rad in radians.
 	*/
-	double torad (double d) const;
-
-public:
-	double x;
-	double y;
+	static double torad (double d) const;
 
 	/**
 		How we should set our vector.
@@ -117,6 +117,22 @@ public:
 		\param b Dependant on \a t.
 	*/
 	void set(Vector::vectorSetType t, double a, double b);
+
+	/// Get the x.
+	/**
+		Get the x value of the vector.
+
+		\return The x value
+	*/
+	double getX ( void );
+	
+	/// Get the y.
+	/**
+		Get the y value of the vector.
+
+		\return The y value
+	*/
+	double getY ( void );
 
 	/// Get the magnitude.
 	/**

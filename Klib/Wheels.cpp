@@ -16,7 +16,7 @@ class Motor
 			Jaguar *jag;
 			Victor *vic;
 		};
-		double mod;
+		double mod; ///< The correction factor to apply to the motors.
 
 	public:
 		Motor ( motorControllerType type, unsigned int slot, unsigned int channel, double modifier)
