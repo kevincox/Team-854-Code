@@ -1,5 +1,5 @@
 #include "vector.hpp"
-/*
+
 double Vector::bir (double a) const
 {
 	while ( a > M_PI )  a -= 2*M_PI;
@@ -173,4 +173,14 @@ void Vector::info()
 {
 	printf("(%lf,%lf) Magnitude: %lf Direction: %lf (%lf degrees)\n", x, y, getMagnitude(), getDirection(), getDirectionDegrees());
 }
-*/
+
+using namespace std;
+ostream &operator << (ostream &os, Vector v)
+{
+	os << "(" << v.x << ", " << v.y << ")";
+	os << " Magnitude: " << v.getMagnitude();
+	os << " Direction: " << v.getDirection();
+	os << " (" << v.getDirectionDegrees() << " degrees)" << endl;
+
+	return os;
+}

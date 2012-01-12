@@ -1,5 +1,7 @@
 #include "WPILib.h"
 
+#include "Drive.hpp"
+
 /**
  * This is a demo program showing the use of the RobotBase class.
  * The SimpleRobot class is the base of a robot application that will automatically call your
@@ -8,15 +10,20 @@
  */ 
 class Robot2012 : public SimpleRobot
 {
-	RobotDrive myRobot; // robot drive system
-	Joystick stick; // only joystick
-
+private:
+	Drive *drive;
+	SpeedController *ml, *mr;
 public:
-	Robot2012(void):
-		myRobot(1, 2),	// these must be initialized in the same order
-		stick(1)		// as they are declared above.
+	Robot2012(void)
 	{
-		myRobot.SetExpiration(0.1);
+	}
+	
+	void init ()
+	{
+		drive = NULL;
+		
+		ml = NULL;
+		mr = NULL;
 	}
 
 	/**
@@ -24,10 +31,6 @@ public:
 	 */
 	void Autonomous(void)
 	{
-		myRobot.SetSafetyEnabled(false);
-		myRobot.Drive(0.5, 0.0); 	// drive forwards half speed
-		Wait(2.0); 				//    for 2 seconds
-		myRobot.Drive(0.0, 0.0); 	// stop robot
 	}
 
 	/**
@@ -35,12 +38,6 @@ public:
 	 */
 	void OperatorControl(void)
 	{
-		myRobot.SetSafetyEnabled(true);
-		while (IsOperatorControl())
-		{
-			myRobot.ArcadeDrive(stick); // drive with arcade style (use right stick)
-			Wait(0.005);				// wait for a motor update time
-		}
 	}
 };
 
