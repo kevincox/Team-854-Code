@@ -1,6 +1,7 @@
 #include "WPILib.h"
 
 #include "Drive.hpp"
+#include "Constants.hpp"
 
 /**
  * This is a demo program showing the use of the RobotBase class.
@@ -19,11 +20,10 @@ public:
 	}
 	
 	void init ()
-	{
-		drive = NULL;
-		
-		ml = NULL;
-		mr = NULL;
+	{	
+		ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
+		mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
+		drive = new Drive(ml, mr);	
 	}
 
 	/**
@@ -31,6 +31,7 @@ public:
 	 */
 	void Autonomous(void)
 	{
+		
 	}
 
 	/**

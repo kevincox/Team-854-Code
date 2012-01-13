@@ -25,8 +25,11 @@
 
 class Vector
 {
+public:
 	double x;
 	double y;
+	
+private:
 
 	/** \internal
 		\brief Bring angle into range
@@ -37,7 +40,7 @@ class Vector
 		\param a The angle.
 		\return An angle co-terminal to \a that is within the range of \c Pi to \c -Pi.
 	*/
-	double bir (double d) const;
+	static double bir (double d);
 	/** \internal
 		\brief Set an angles zero north
 
@@ -46,7 +49,7 @@ class Vector
 		\param d Input angle ( with zero "East" ).
 		\return Output angle ( with zero "North" ).
 	*/
-	double azn (double d) const;
+	static double azn (double d);
 	/** \internal
 		\brief Set an angles zero South
 
@@ -55,7 +58,7 @@ class Vector
 		\param d Input angle ( with zero "North" ).
 		\return Output angle ( with zero "East" ).
 	 */
-	double aze (double d) const;
+	static double aze (double d);
 	/**	\internal
 		\brief Convert radians to degrees
 
@@ -66,7 +69,7 @@ class Vector
 	*/
 
 public:	
-	static double todeg (double d) const;
+	static double todeg (double d);
 	/**	\internal
 		\brief Convert degrees to radians
 
@@ -75,7 +78,7 @@ public:
 		\param rad An angle in degree measure to be converted to radians
 		\return The measure of \a rad in radians.
 	*/
-	static double torad (double d) const;
+	static double torad (double d);
 
 	/**
 		How we should set our vector.

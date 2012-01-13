@@ -1,6 +1,6 @@
 #include "vector.hpp"
 
-double Vector::bir (double a) const
+double Vector::bir (double a)
 {
 	while ( a > M_PI )  a -= 2*M_PI;
 	while ( a < -M_PI ) a += 2*M_PI;
@@ -8,22 +8,22 @@ double Vector::bir (double a) const
 	return a;
 }
 
-double Vector::azn (double d) const
+double Vector::azn (double d)
 {
 	return bir(d - (M_PI/2));
 }
 
-double Vector::aze (double d) const
+double Vector::aze (double d)
 {
 	return bir(d + (M_PI/2));
 }
 
-double Vector::todeg(double rad) const
+double Vector::todeg(double rad)
 {
 	return rad*180/M_PI;
 }
 
-double Vector::torad(double deg) const
+double Vector::torad(double deg)
 {
 	return deg*M_PI/180;
 }
