@@ -10,6 +10,8 @@ struct Constants
 	UINT32 motorLChannel;
 	UINT32 motorRSlot;
 	UINT32 motorRChannel;
+	UINT32 accel1Slot;
+	UINT32 accel1Channel;
 	UINT32 jsDrivePort;
 	float js1MaxX;
 	float js1MaxY;
@@ -19,6 +21,8 @@ struct Constants
 		motorLChannel(1),
 		motorRSlot(1),
 		motorRChannel(2),
+		accel1Slot(1),
+		accel1Channel(3),
 		jsDrivePort(1),
 		js1MaxX(1),
 		js1MaxY(1)
