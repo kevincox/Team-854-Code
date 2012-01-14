@@ -1,4 +1,4 @@
-/*
+#include <WPIlib.h>
 #include <Jaguar.h>
 #include <Victor.h>
 
