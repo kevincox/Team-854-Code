@@ -19,6 +19,7 @@ private:
 	Drive *drive;
 	SpeedController *ml, *mr;
 	Input *inputs;
+	
 public:
 	Robot2012(void)
 	{
@@ -26,14 +27,20 @@ public:
 	
 	void RobotInit ()
 	{	
-		cerr << "INIT" << endl;
+		cerr << "Init" << endl;
 		
 		cerr << "Loading Joysticks" << endl;
 		inputs = new Input();
-		
+
+		cerr << "Loading Motor Controllers" << endl;
 		ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
 		mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
+
+		cerr << "Loading Drive System" << endl;
 		drive = new Drive(ml, mr);
+		
+		cerr << "Inited\n" <<
+			"---------------------" << endl;
 	}
 	
 	void Disabled ()

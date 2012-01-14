@@ -26,3 +26,11 @@ void Input::outputCoords()
 	cerr << "X: " << v.x << endl;
 	cerr << "Y: " << v.y << endl;
 }
+
+void Input::update()
+{
+	x = jsDrive.GetX();
+	y = jsDrive.GetY();
+	button2Pressed = jsDrive.GetRawButton(2);
+	button3Pressed = jsDrive.GetRawButton(3);
+}

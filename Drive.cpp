@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <math.h>
 
 using namespace std;
@@ -36,13 +37,15 @@ void Drive::drive()
 	ls *= leftCorrection;
 	rs *= rightCorrection;
 
-	double scale = fabs(1/max(max(ls, rs), 1));
+	double scale = 1/max(max(fabs(ls), fabs(rs)), 1);
 	
 	ls *= scale;
 	rs *= scale;
 
 	left->Set(ls);
 	right->Set(rs);
+	
+	fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
 }
 
 Vector Drive::getVelocity()

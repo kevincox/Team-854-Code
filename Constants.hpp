@@ -18,7 +18,7 @@ struct Constants
 		motorLSlot(1),
 		motorLChannel(1),
 		motorRSlot(1),
-		motorRChannel(3),
+		motorRChannel(2),
 		jsDrivePort(1),
 		js1MaxX(1),
 		js1MaxY(1)

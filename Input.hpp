@@ -8,11 +8,16 @@ class Input
 {
 private:
 	Joystick jsDrive;
+	float x;
+	float y;
+	bool button2Pressed;
+	bool button3Pressed;
 public:
 	Input();
 	~Input();
 	Vector getDirection();
 	void outputCoords();
+	void update();
 };
 
 #endif
