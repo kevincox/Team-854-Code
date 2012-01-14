@@ -26,8 +26,8 @@ void Drive::drive()
 
 	ls = rs = velocity.y;
 
-	ls -= velocity.x;
-	rs += velocity.x;
+	ls += velocity.x;
+	rs -= velocity.x;
 
 	ls *= leftCorrection;
 	rs *= rightCorrection;
