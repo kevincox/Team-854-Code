@@ -15,12 +15,14 @@ Vector Input::getDirection()
 {
 	return Vector(Vector::xy,
 	               jsDrive.GetX()/constants.js1MaxX,
-	               jsDrive.GetY()/constants.js1MaxY
+	               jsDrive.GetY()/constants.js1MaxY*(-1)
 	             );
 }
 
 void Input::outputCoords()
 {
-	cerr << "X: " << jsDrive.GetX()/constants.js1MaxX << endl;
-	cerr << "Y: " << jsDrive.GetY()/constants.js1MaxY * -1<< endl;
+	Vector v = getDirection();
+	
+	cerr << "X: " << v.x << endl;
+	cerr << "Y: " << v.y << endl;
 }

@@ -1,5 +1,9 @@
-#include "Drive.hpp"
+#include <iostream>
 #include <math.h>
+
+using namespace std;
+
+#include "Drive.hpp"
 
 Drive::Drive(SpeedController *left, SpeedController *right):
 	left(left),
@@ -32,13 +36,13 @@ void Drive::drive()
 	ls *= leftCorrection;
 	rs *= rightCorrection;
 
-	double scale = 1/max(ls, rs);
-
+	double scale = fabs(1/max(max(ls, rs), 1));
+	
 	ls *= scale;
 	rs *= scale;
 
 	left->Set(ls);
-	right->set(rs);
+	right->Set(rs);
 }
 
 Vector Drive::getVelocity()

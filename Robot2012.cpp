@@ -13,7 +13,7 @@ using namespace std;
  * Autonomous and OperatorControl methods at the right time as controlled by the switches on
  * the driver station or the field controls.
  */ 
-class Robot2012 : public SimpleRobot
+class Robot2012 : public IterativeRobot
 {
 private:
 	Drive *drive;
@@ -52,10 +52,10 @@ public:
 	/**
 	 * Runs the motors with arcade steering. 
 	 */
-	void OperatorControl(void)
+	void TeleopPeriodic (void)
 	{
-		while(1)
-			inputs->outputCoords();
+		drive->setVelocity(inputs->getDirection());
+		drive->drive();
 	}
 };
 
