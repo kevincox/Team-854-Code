@@ -16,12 +16,12 @@ private:
 	SpeedController *left;
 	SpeedController *right;
 
-	double leftCorrection;
-	double rightCorrection;
-
 	void init(void);
 
 public:
+	double leftCorrection;
+	double rightCorrection;
+
 	Drive(SpeedController *left, SpeedController *right);
 	~Drive();
 	void drive();

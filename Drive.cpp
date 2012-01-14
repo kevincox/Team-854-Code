@@ -11,6 +11,8 @@ Drive::Drive(Motor *left, Motor *right):
 void Drive::init()
 {
 	this->flipped = false;
+
+	leftCorrection = rightCorrection = 1;
 }
 
 Drive::~Drive()
