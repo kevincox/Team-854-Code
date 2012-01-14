@@ -4,11 +4,11 @@
 
 #include "vectorLib/vector.hpp"
 
+#include <WPILib.h>
 #include <SpeedController.h>
 
 class Drive
 {
-
 private:
 	bool flipped;
 
