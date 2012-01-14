@@ -1,26 +1,46 @@
 #include "Drive.hpp"
+#include <math.h>
 
 Drive::Drive(SpeedController *left, SpeedController *right):
 	left(left),
 	right(right)
-{	
+{
 	init();
 }
 
 void Drive::init()
 {
 	this->flipped = false;
+
+	leftCorrection = rightCorrection = 1;
 }
 
 Drive::~Drive()
 {
-	
+
 }
 
 void Drive::drive()
 {
-	
+	double ls, rs; // Speed of the motors.
+
+	ls = rs = velocity.y;
+
+	ls += velocity.x;
+	rs -= velocity.x;
+
+	ls *= leftCorrection;
+	rs *= rightCorrection;
+
+	double scale = 1/max(ls, rs);
+
+	ls *= scale;
+	rs *= scale;
+
+	left->Set(ls);
+	right->set(rs);
 }
+
 Vector Drive::getVelocity()
 {
 	return velocity;
@@ -29,14 +49,14 @@ Vector Drive::getVelocity()
 Drive *Drive::setVelocity(const Vector &velocity)
 {
 	this->velocity = velocity;
-	
+
 	return this;
 }
 
 Drive *Drive::setFlip(bool flip)
 {
 	this->flipped = flip;
-	
+
 	return this;
 }
 
