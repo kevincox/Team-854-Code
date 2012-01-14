@@ -1,6 +1,6 @@
 #include "Drive.hpp"
 
-Drive::Drive(Motor *left, Motor *right):
+Drive::Drive(SpeedController *left, SpeedController *right):
 	left(left),
 	right(right)
 {	

@@ -1,7 +1,11 @@
+#include <iostream>
+using namespace std;
+
 #include "WPILib.h"
 
 #include "Drive.hpp"
 #include "Constants.hpp"
+#include "Input.hpp"
 
 /**
  * This is a demo program showing the use of the RobotBase class.
@@ -14,16 +18,27 @@ class Robot2012 : public SimpleRobot
 private:
 	Drive *drive;
 	SpeedController *ml, *mr;
+	Input *inputs;
 public:
 	Robot2012(void)
 	{
 	}
 	
-	void init ()
+	void RobotInit ()
 	{	
+		cerr << "INIT" << endl;
+		
+		cerr << "Loading Joysticks" << endl;
+		inputs = new Input();
+		
 		ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
 		mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
-		drive = new Drive(ml, mr);	
+		drive = new Drive(ml, mr);
+	}
+	
+	void Disabled ()
+	{
+		cerr << "DISABLED" << endl;
 	}
 
 	/**
@@ -39,6 +54,8 @@ public:
 	 */
 	void OperatorControl(void)
 	{
+		while(1)
+			inputs->outputCoords();
 	}
 };
 

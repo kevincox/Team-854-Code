@@ -92,7 +92,7 @@ public:
 
 	/// Default Constructor
 	/**
-		Creates a Vector object initlized to nothing. (x and y as zero).
+		Creates a Vector object initialized to nothing. (x and y as zero).
 	*/
 	Vector(void);
 
@@ -100,7 +100,7 @@ public:
 	/**
 	 *	Copys the given vector
 	 */
-	Vector(Vector &v);
+	Vector(const Vector &v);
 
 	/// Constructor
 	/**

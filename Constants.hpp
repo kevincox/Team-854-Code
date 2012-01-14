@@ -2,6 +2,7 @@
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
+#include <WPILib.h>
 
 struct Constants
 {
@@ -9,6 +10,7 @@ struct Constants
 	UINT32 motorLChannel;
 	UINT32 motorRSlot;
 	UINT32 motorRChannel;
+	UINT32 jsDrivePort;
 	float js1MaxX;
 	float js1MaxY;
 	
@@ -17,11 +19,14 @@ struct Constants
 		motorLChannel(1),
 		motorRSlot(1),
 		motorRChannel(3),
+		jsDrivePort(1),
 		js1MaxX(1),
 		js1MaxY(1)
 	{
 		
 	}
-}constants;
+};
+
+extern Constants constants;
 
 #endif

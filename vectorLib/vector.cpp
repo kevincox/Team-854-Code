@@ -32,7 +32,7 @@ Vector::Vector ( void ):
 	x(0), y(0)
 { }
 
-Vector::Vector ( Vector &v ):
+Vector::Vector ( const Vector &v ):
 x(v.x), y(v.y)
 { }
 

@@ -11,7 +11,8 @@ private:
 public:
 	Input();
 	~Input();
-	Vector getVector();
+	Vector getDirection();
+	void outputCoords();
 };
 
 #endif
