@@ -6,21 +6,21 @@
 
 struct Constants
 {
-	UINT32 motorLSlot;
-	UINT32 motorLChannel;
-	UINT32 motorRSlot;
-	UINT32 motorRChannel;
-	UINT32 jsDrivePort;
+	const UINT32 motorLSlot;
+	const UINT32 motorLChannel;
+	const UINT32 motorRSlot;
+	const UINT32 motorRChannel;
+	const UINT32 jsDrivePort;
 
-	double jsDriveMaxX;
-	double jsDriveMaxY;
+	const double jsDriveMaxX;
+	const double jsDriveMaxY;
 
-	double jsDriveButtonReverse;
+	const double jsDriveButtonReverse;
 
-	double jsDriveDeadbandXMax;
-	double jsDriveDeadbandXMin;
-	double jsDriveDeadbandYMax;
-	double jsDriveDeadbandYMin;
+	const double jsDriveDeadbandXMax;
+	const double jsDriveDeadbandXMin;
+	const double jsDriveDeadbandYMax;
+	const double jsDriveDeadbandYMin;
 
 	Constants ( ):
 		motorLSlot(1),
