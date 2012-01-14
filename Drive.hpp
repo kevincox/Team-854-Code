@@ -15,9 +15,12 @@ private:
 	Vector velocity;
 	SpeedController *left;
 	SpeedController *right;
-	
+
+	double leftCorrection;
+	double rightCorrection;
+
 	void init(void);
-	
+
 public:
 	Drive(SpeedController *left, SpeedController *right);
 	~Drive();
@@ -27,7 +30,7 @@ public:
 	Drive *setFlip(bool flip);
 	bool flip(void);
 	bool isFlipped();
-	
+
 };
 
 #endif
