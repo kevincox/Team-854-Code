@@ -6,6 +6,7 @@ using namespace std;
 #include "Drive.hpp"
 #include "Constants.hpp"
 #include "Input.hpp"
+#include "Sensor.hpp"
 
 /**
  * This is a demo program showing the use of the RobotBase class.
@@ -19,6 +20,7 @@ private:
 	Drive *drive;
 	SpeedController *ml, *mr;
 	Input *inputs;
+	Sensor *sensors;
 	
 public:
 	Robot2012(void)
@@ -38,7 +40,7 @@ public:
 
 		cerr << "Loading Drive System" << endl;
 		drive = new Drive(ml, mr);
-		
+		sensors = new Sensor();
 		cerr << "Inited\n" <<
 			"---------------------" << endl;
 	}
@@ -63,6 +65,8 @@ public:
 	{
 		drive->setVelocity(inputs->getDirection());
 		drive->drive();
+		cerr << sensors->getAccelVal(1) << endl;
+		
 	}
 };
 

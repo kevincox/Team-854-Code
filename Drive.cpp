@@ -38,13 +38,13 @@ void Drive::drive()
 	rs *= rightCorrection;
 
 	double scale = 1/max(max(fabs(ls), fabs(rs)), 1);
-	
+
 	ls *= scale;
 	rs *= scale;
 
 	left->Set(ls);
 	right->Set(rs);
-	
+
 	fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
 }
 
