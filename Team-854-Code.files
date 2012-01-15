@@ -8,3 +8,5 @@
 /data/Scripts/Team-854-Code/Robot2012.cpp
 /data/Scripts/Team-854-Code/Sensor.hpp
 Input.cpp
+driverstation.cpp
+driverstation.hpp

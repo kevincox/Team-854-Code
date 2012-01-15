@@ -25,27 +25,38 @@ Drive::~Drive()
 
 }
 
-void Drive::drive()
+void Drive::calculate()
 {
-	double ls, rs; // Speed of the motors.
+	leftSpeed = rightSpeed = velocity.y;
 
-	ls = rs = velocity.y;
+	leftSpeed += velocity.x;
+	rightSpeed -= velocity.x;
 
-	ls += velocity.x;
-	rs -= velocity.x;
+	leftSpeed *= leftCorrection;
+	rightSpeed *= rightCorrection;
 
-	ls *= leftCorrection;
-	rs *= rightCorrection;
+	double scale = 1/max(max(fabs(leftSpeed), fabs(rightSpeed)), 1);
 
-	double scale = 1/max(max(fabs(ls), fabs(rs)), 1);
+	leftSpeed *= scale;
+	rightSpeed *= scale;
 
-	ls *= scale;
-	rs *= scale;
+	//fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
+}
 
-	left->Set(ls);
-	right->Set(rs);
+void Drive::update()
+{
+	left->Set(leftSpeed);
+	right->Set(rightSpeed);
+}
 
-	fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
+double Drive::getLeftSpeed()
+{
+	return leftSpeed;
+}
+
+double Drive::getRightSpeed()
+{
+	return rightSpeed;
 }
 
 Vector Drive::getVelocity()

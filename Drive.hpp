@@ -9,8 +9,10 @@
 
 class Drive
 {
-private:
 	bool flipped;
+
+	double leftSpeed;
+	double rightSpeed;
 
 	Vector velocity;
 	SpeedController *left;
@@ -24,10 +26,17 @@ public:
 
 	Drive(SpeedController *left, SpeedController *right);
 	~Drive();
-	void drive();
+
+	void calculate();
+	void update();
+
+	double getLeftSpeed();
+	double getRightSpeed();
+
 	Vector getVelocity();
 	Drive *setVelocity(const Vector &velocity);
 	Drive *setFlip(bool flip);
+
 	bool flip(void);
 	bool isFlipped();
 
