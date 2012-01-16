@@ -38,7 +38,7 @@ void Drive::drive()
 	rs *= rightCorrection;
 
 	double scale = 1/max(max(fabs(ls), fabs(rs)), 1);
-	
+
 	ls *= scale;
 	rs *= scale;
 
