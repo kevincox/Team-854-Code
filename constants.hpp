@@ -12,13 +12,12 @@ struct Constants
 	const UINT32 motorRChannel;
 	const UINT32 accel1Slot;
 	const UINT32 accel1Channel;
-
 	const UINT32 jsDrivePort;
 
 	const double jsDriveMaxX;
 	const double jsDriveMaxY;
 
-	const double jsDriveButtonReverse;
+	const UINT32 jsDriveButtonReverse;
 
 	const double jsDriveDeadbandXMax;
 	const double jsDriveDeadbandXMin;
@@ -37,9 +36,9 @@ struct Constants
 		jsDriveMaxY(1),
 		jsDriveButtonReverse(5),
 		jsDriveDeadbandXMax(0.05),
-		jsDriveDeadbandXMin(0.05),
+		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),
-		jsDriveDeadbandYMin(0.05)
+		jsDriveDeadbandYMin(-0.05)
 	{
 
 	}

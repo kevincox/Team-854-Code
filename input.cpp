@@ -13,6 +13,8 @@ Input::~Input()
 
 Vector Input::driveDirection()
 {
+	//fprintf(stderr, "[jsDrive]x: % .4lf y: % .4lf\n", driveDir.x, driveDir.y);
+
 	return driveDir;
 }
 
@@ -27,7 +29,7 @@ void Input::update()
 		 driveDir.x > constants.jsDriveDeadbandXMin ) driveDir.x = 0;
 	if ( driveDir.y < constants.jsDriveDeadbandYMax &&
 		 driveDir.y > constants.jsDriveDeadbandYMin ) driveDir.y = 0;
-
+	
 	bool s;
 
 	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);

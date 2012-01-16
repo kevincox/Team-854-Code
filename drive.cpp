@@ -47,6 +47,8 @@ void Drive::update()
 {
 	left->Set(leftSpeed);
 	right->Set(rightSpeed);
+
+	//fprintf(stderr, "[Drive]l: % .4lf r: % .4lf\n", ls, rs);
 }
 
 double Drive::getLeftSpeed()
