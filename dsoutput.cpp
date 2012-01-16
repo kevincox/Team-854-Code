@@ -12,13 +12,13 @@ void DSOutput::init()
 
 void DSOutput::update()
 {
-	if      (robot->IsDisabled())        out->Printf(1, 1, "Mode: Disabled");
-	else if (robot->IsAutonomous())      out->Printf(1, 1, "Mode: Autonomous");
-	else if (robot->IsOperatorControl()) out->Printf(1, 1, "Mode: Teleop");
+	if      (robot->IsDisabled())        out->PrintfLine(1, 1, "Mode: Disabled");
+	else if (robot->IsAutonomous())      out->PrintfLine(1, 1, "Mode: Autonomous");
+	else if (robot->IsOperatorControl()) out->PrintfLine(1, 1, "Mode: Teleop");
 
-	out->Printf(2, 1, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");
-	out->Printf(3, 1, "L: % .4lf   R: % .4lf",
-	             drive->getLeftSpeed(), drive->getRightSpeed());
+	out->PrintfLine(2, 1, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");
+	out->PrintfLine(3, 1, "L: % .4lf   R: % .4lf",
+	                 drive->getLeftSpeed(), drive->getRightSpeed());
 
 	out->UpdateLCD();
 }
