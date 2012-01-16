@@ -52,7 +52,7 @@ public:
 	void TeleopPeriodic (void)
 	{
 		output->update();
-		cerr << sensors->getAccelVal(1) << endl;
+		//cerr << sensors->getAccelVal(1) << endl;
 	}
 
 	void TeleopContinuous (void)
