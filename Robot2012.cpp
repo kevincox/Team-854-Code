@@ -7,7 +7,7 @@ using namespace std;
 #include "Constants.hpp"
 #include "Input.hpp"
 #include "Sensor.hpp"
-#include "driverstation.hpp"
+#include "dsoutput.hpp"
 
 class Robot2012 : public IterativeRobot
 {
@@ -59,7 +59,7 @@ public:
 	{
 		inputs->update();
 
-		drive->setVelocity(inputs->getDirection());
+		drive->setVelocity(inputs->driveDirection());
 		drive->calculate();
 
 		drive->update();

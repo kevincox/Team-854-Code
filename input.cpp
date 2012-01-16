@@ -13,18 +13,14 @@ Input::~Input()
 
 Vector Input::driveDirection()
 {
-	//*
-	cerr << "X: " << v.x << endl;
-	cerr << "Y: " << v.y << endl;
-	//*/
 	return driveDir;
 }
 
 void Input::update()
 {
 	driveDir = Vector(Vector::xy,
-	                   jsDrive.GetX()/constants.js1MaxX,
-	                   jsDrive.GetY()/constants.js1MaxY*(-1)
+	                   jsDrive.GetX()/constants.jsDriveMaxX,
+	                   jsDrive.GetY()/constants.jsDriveMaxY*(-1)
 	                 );
 
 	if ( driveDir.x < constants.jsDriveDeadbandXMax &&
@@ -34,14 +30,14 @@ void Input::update()
 
 	bool s;
 
-	s = jsDrive.GetButton();
+	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
 	if ( s && !bFlipState ) bFlipPressed = true;
 	bFlipState = s;
 }
 
 bool Input::filpPressed()
 {
-	var r = bFlipPressed;
+	bool r = bFlipPressed;
 	bFlipPressed = false;
 	return r;
 }
