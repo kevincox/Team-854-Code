@@ -21,7 +21,6 @@ const DriverStationLCD::Line l6 = DriverStationLCD::kUser_Line6;
 
 void DSOutput::update()
 {
-
 /*
 	if      (robot->IsDisabled())        out->PrintfLine(l1, "Mode: Disabled");
 	else if (robot->IsAutonomous())      out->PrintfLine(l1, "Mode: Autonomous");
