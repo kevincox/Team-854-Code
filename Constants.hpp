@@ -17,7 +17,7 @@ struct Constants
 	double jsDriveMaxX;
 	double jsDriveMaxY;
 
-	double jsDriveButtonReverse;
+	const UINT32 jsDriveButtonReverse;
 
 	double jsDriveDeadbandXMax;
 	double jsDriveDeadbandXMin;
@@ -36,9 +36,9 @@ struct Constants
 		jsDriveMaxY(1),
 		jsDriveButtonReverse(5),
 		jsDriveDeadbandXMax(0.05),
-		jsDriveDeadbandXMin(0.05),
+		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),
-		jsDriveDeadbandYMin(0.05)
+		jsDriveDeadbandYMin(-0.05)
 	{
 
 	}

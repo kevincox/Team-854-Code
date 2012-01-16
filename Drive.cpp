@@ -45,7 +45,7 @@ void Drive::drive()
 	left->Set(ls);
 	right->Set(rs);
 	
-	fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
+	//fprintf(stderr, "[Drive]l: % .4lf r: % .4lf\n", ls, rs);
 }
 
 Vector Drive::getVelocity()

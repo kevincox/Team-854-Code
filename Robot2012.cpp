@@ -63,9 +63,12 @@ public:
 	 */
 	void TeleopPeriodic (void)
 	{
-		drive->setVelocity(inputs->getDirection());
+		inputs->update();
+		
+		drive->setVelocity(inputs->driveDirection());
+		
 		drive->drive();
-		cerr << sensors->getAccelVal(1) << endl;
+		//fprintf(stderr, "Acceleration: % .4lf\n", sensors->getAccelVal(1));
 		
 	}
 };
