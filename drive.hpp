@@ -21,9 +21,6 @@ class Drive
 	void init(void);
 
 public:
-	double leftCorrection;
-	double rightCorrection;
-
 	Drive(SpeedController *left, SpeedController *right);
 	~Drive();
 

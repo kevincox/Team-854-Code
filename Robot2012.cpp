@@ -1,72 +1,53 @@
 #include <iostream>
 using namespace std;
 
-#include "WPILib.h"
+#include "Robot2012.hpp"
 
-#include "drive.hpp"
-#include "constants.hpp"
-#include "input.hpp"
-#include "sensor.hpp"
-#include "dsoutput.hpp"
-
-class Robot2012 : public IterativeRobot
+Robot2012::Robot2012(void)
 {
-private:
-	Drive *drive;
-	SpeedController *ml, *mr;
+}
 
-	Input *inputs;
-	Sensor *sensors;
+void Robot2012::RobotInit ()
+{
+	cerr << "Initilizing" << endl;
 
-	DSOutput *output;
+	cerr << "Loading Sensors" << endl;
+	sensors = new Sensor();
 
-public:
-	Robot2012(void)
-	{
-	}
+	cerr << "Loading Human Inputs" << endl;
+	inputs = new Input();
 
-	void RobotInit ()
-	{
-		cerr << "Initilizing" << endl;
+	cerr << "Loading Motor Controllers" << endl;
+	ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
+	mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
 
-		cerr << "Loading Sensors" << endl;
-		sensors = new Sensor();
+	cerr << "Loading Drive System" << endl;
+	drive = new Drive(ml, mr);
 
-		cerr << "Loading Human Inputs" << endl;
-		inputs = new Input();
+	cerr << "Loading Output" << endl;
+	output = new DSOutput(this);
 
-		cerr << "Loading Motor Controllers" << endl;
-		ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
-		mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
+	cerr << "Initilized" <<
+		"---------------------" << endl;
+}
 
-		cerr << "Loading Drive System" << endl;
-		drive = new Drive(ml, mr);
+void Robot2012::TeleopPeriodic (void)
+{
+	output->update();
+	//cerr << sensors->getAccelVal(1) << endl;
+}
 
-		cerr << "Loading Output" << endl;
-		output = new DSOutput(this, drive);
+void Robot2012::TeleopContinuous (void)
+{
+	inputs->update();
 
-		cerr << "Initilized" <<
-			"---------------------" << endl;
-	}
+	drive->setFlip(inputs->driveFlipped());
 
-	void TeleopPeriodic (void)
-	{
-		output->update();
-		//cerr << sensors->getAccelVal(1) << endl;
-	}
+	drive->setVelocity(inputs->driveDirection());
+	drive->calculate();
 
-	void TeleopContinuous (void)
-	{
-		inputs->update();
-
-		drive->setFlip(inputs->driveFlipped());
-
-		drive->setVelocity(inputs->driveDirection());
-		drive->calculate();
-
-		drive->update();
-	}
-};
+	drive->update();
+}
 
 START_ROBOT_CLASS(Robot2012);
 

@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "drive.hpp"
+#include "constants.hpp"
 
 Drive::Drive(SpeedController *left, SpeedController *right):
 	left(left),
@@ -16,8 +17,6 @@ Drive::Drive(SpeedController *left, SpeedController *right):
 void Drive::init()
 {
 	this->flipped = false;
-
-	leftCorrection = rightCorrection = 1;
 }
 
 Drive::~Drive()
@@ -32,8 +31,8 @@ void Drive::calculate()
 	leftSpeed  += velocity.x; // Modify by the turn.
 	rightSpeed -= velocity.x; //
 
-	leftSpeed  *= leftCorrection;  // Apply the wheel correction factor.
-	rightSpeed *= rightCorrection; //
+	leftSpeed  *= constants.motorLCorrection; // Apply the wheel correction
+	rightSpeed *= constants.motorRCorrection; // factor.
 
 	double scale = 1/max(max(fabs(leftSpeed), fabs(rightSpeed)), 1);
 
