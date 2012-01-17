@@ -15,6 +15,7 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 Elevator *Elevator::calculate()
 {
 
+
 	return this;
 }
 
