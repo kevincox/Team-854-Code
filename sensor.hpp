@@ -3,14 +3,14 @@
 #define SENSOR_HPP
 
 #include <WPILib.h>
-#include "Constants.hpp"
+#include "constants.hpp"
 
 class Sensor
 {
 private:
 	//Gyro gyros[0];
 	Accelerometer *accels[1];
-	
+
 public:
 	Sensor();
 	~Sensor();

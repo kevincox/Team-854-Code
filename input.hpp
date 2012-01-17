@@ -19,7 +19,7 @@ public:
 
 	Vector driveDirection();
 	void update();
-	bool filpPressed();
+	bool driveFlipped();
 };
 
 #endif

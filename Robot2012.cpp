@@ -3,10 +3,10 @@ using namespace std;
 
 #include "WPILib.h"
 
-#include "Drive.hpp"
-#include "Constants.hpp"
-#include "Input.hpp"
-#include "Sensor.hpp"
+#include "drive.hpp"
+#include "constants.hpp"
+#include "input.hpp"
+#include "sensor.hpp"
 #include "dsoutput.hpp"
 
 class Robot2012 : public IterativeRobot

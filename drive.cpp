@@ -4,7 +4,7 @@
 
 using namespace std;
 
-#include "Drive.hpp"
+#include "drive.hpp"
 
 Drive::Drive(SpeedController *left, SpeedController *right):
 	left(left),

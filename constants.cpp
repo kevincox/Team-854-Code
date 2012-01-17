@@ -1,3 +1,3 @@
-#include "Constants.hpp"
+#include "constants.hpp"
 
 Constants constants;

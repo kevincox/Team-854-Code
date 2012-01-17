@@ -1,5 +1,5 @@
-#include "Sensor.hpp"
-#include "Constants.hpp"
+#include "sensor.hpp"
+#include "constants.hpp"
 
 Sensor::Sensor()
 {
@@ -8,7 +8,7 @@ Sensor::Sensor()
 
 Sensor::~Sensor()
 {
-	
+
 }
 
 void Sensor::init()

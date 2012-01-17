@@ -1,5 +1,5 @@
-#include "Input.hpp"
-#include "Constants.hpp"
+#include "input.hpp"
+#include "constants.hpp"
 
 Input::Input():
 	jsDrive(constants.jsDrivePort)
@@ -29,7 +29,7 @@ void Input::update()
 		 driveDir.x > constants.jsDriveDeadbandXMin ) driveDir.x = 0;
 	if ( driveDir.y < constants.jsDriveDeadbandYMax &&
 		 driveDir.y > constants.jsDriveDeadbandYMin ) driveDir.y = 0;
-	
+
 	bool s;
 
 	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
@@ -37,7 +37,7 @@ void Input::update()
 	bFlipState = s;
 }
 
-bool Input::filpPressed()
+bool Input::driveFlipped()
 {
 	bool r = bFlipPressed;
 	bFlipPressed = false;
