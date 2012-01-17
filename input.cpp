@@ -4,6 +4,7 @@
 Input::Input():
 	jsDrive(constants.jsDrivePort)
 {
+	driveIsFlipped = false;
 }
 
 Input::~Input()

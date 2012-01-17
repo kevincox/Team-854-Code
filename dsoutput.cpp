@@ -24,9 +24,10 @@ const DriverStationLCD::Line l6 = DriverStationLCD::kUser_Line6;
 void DSOutput::update()
 {
 
-	if      (robot->IsDisabled())        out->PrintfLine(l1, "Mode: Disabled");
-	else if (robot->IsAutonomous())      out->PrintfLine(l1, "Mode: Autonomous");
-	else if (robot->IsOperatorControl()) out->PrintfLine(l1, "Mode: Teleop");
+	if      (robot->IsDisabled())        out->PrintfLine(l1, "Mode: Disabled.");
+	else if (robot->IsAutonomous())      out->PrintfLine(l1, "Mode: Autonomous.");
+	else if (robot->IsOperatorControl()) out->PrintfLine(l1, "Mode: Teleop.");
+	else                                 out->PrintfLine(l1, "Mode: WTF?!? I have no clue.");
 
 
 	out->PrintfLine(l2, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");

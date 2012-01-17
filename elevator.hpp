@@ -6,6 +6,7 @@
 #include <Encoder.h>
 
 #include "ball.hpp"
+#include <DigitalInput.h>
 
 class Elevator
 {
@@ -13,16 +14,20 @@ class Elevator
 
 	SpeedController *top, *bottom;
 	Encoder *eTop, *eBottom;
+	DigitalInput *iTop, *iIn, *iEnter;
 
 	void init (void);
 
 public:
 	Elevator(SpeedController *top, SpeedController *bottom,
-	          Encoder *eTop, Encoder *eBottom
+	          Encoder *eTop, Encoder *eBottom,
+	          DigitalInput *iTop, DigitalInput *iIn,
+	          DigitalInput *iEnter
 	        );
 
 	Elevator *calculate(void);
 	Elevator *update(void);
+	bool isFull(void);
 
 };
 
