@@ -5,13 +5,14 @@ class Ball
 {
 	double pos;
 
-	static double radius;
-	static double diameter;
+	double radius;
+	double diameter;
 
 	void init (void);
 
 public:
-	Ball() {}
+	Ball();
+	Ball(double pos);
 
 	Ball *setPos(double pos);
 
