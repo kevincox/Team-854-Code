@@ -24,6 +24,8 @@ struct Constants
 	const double jsDriveDeadbandYMax;
 	const double jsDriveDeadbandYMin;
 
+	const double ballDiameter;
+
 	Constants ( ):
 		motorLSlot(1),
 		motorLChannel(1),
@@ -38,7 +40,8 @@ struct Constants
 		jsDriveDeadbandXMax(0.05),
 		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),
-		jsDriveDeadbandYMin(-0.05)
+		jsDriveDeadbandYMin(-0.05),
+		ballDiameter(9)
 	{
 
 	}

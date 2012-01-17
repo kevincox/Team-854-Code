@@ -13,3 +13,7 @@ input.cpp
 dsoutput.cpp
 drive.cpp
 constants.cpp
+elevator.hpp
+elevator.cpp
+ball.cpp
+ball.hpp
