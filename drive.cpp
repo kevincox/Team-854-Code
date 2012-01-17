@@ -26,7 +26,7 @@ Drive::~Drive()
 
 void Drive::calculate()
 {
-	leftSpeed = rightSpeed = velocity.y; // Forward velocity.
+	leftSpeed = rightSpeed = flipped?-velocity.y:velocity.y; // Forward velocity.
 
 	leftSpeed  += velocity.x; // Modify by the turn.
 	rightSpeed -= velocity.x; //
@@ -38,12 +38,6 @@ void Drive::calculate()
 
 	leftSpeed  *= scale; // Scale to the `-1 < speed < 1` range.
 	rightSpeed *= scale;
-
-	if (flipped) // We are driving backwards.
-	{
-		leftSpeed  *= -1; // Apply reversal.
-		rightSpeed *= -1; //
-	}
 
 	//fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
 }
