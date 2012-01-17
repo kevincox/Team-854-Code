@@ -27,6 +27,10 @@ public:
 
 	Robot2012(void);
 	void RobotInit ();
+	void DisabledPeriodic(void);
+	void DisabledContinuous(void);
+	void AutonomousPeriodic(void);
+	void AutonomousContinuous(void);
 	void TeleopPeriodic (void);
 	void TeleopContinuous (void);
 };

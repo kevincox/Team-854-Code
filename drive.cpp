@@ -26,7 +26,7 @@ Drive::~Drive()
 
 void Drive::calculate()
 {
-	leftSpeed = rightSpeed = velocity.y; // Foreward velocity.
+	leftSpeed = rightSpeed = velocity.y; // Forward velocity.
 
 	leftSpeed  += velocity.x; // Modify by the turn.
 	rightSpeed -= velocity.x; //

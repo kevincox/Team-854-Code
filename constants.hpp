@@ -34,8 +34,8 @@ struct Constants
 		motorLChannel(1),
 		motorRSlot(1),
 		motorRChannel(2),
-		motorLCorrection(1),
-		motorRCorrection(-1),
+		motorLCorrection(-1),
+		motorRCorrection(1),
 		
 		accel1Slot(1),
 		accel1Channel(3),

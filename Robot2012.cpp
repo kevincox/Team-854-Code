@@ -27,8 +27,28 @@ void Robot2012::RobotInit ()
 	cerr << "Loading Output" << endl;
 	output = new DSOutput(this);
 
-	cerr << "Initilized" <<
-		"---------------------" << endl;
+	cerr << "Initilized\n" <<
+		"-------------------------" << endl;
+}
+
+void Robot2012::DisabledPeriodic (void)
+{
+	output->update();	
+}
+
+void Robot2012::DisabledContinuous(void)
+{
+	
+}
+
+void Robot2012::AutonomousPeriodic (void)
+{
+	output->update();	
+}
+
+void Robot2012::AutonomousContinuous(void)
+{
+	
 }
 
 void Robot2012::TeleopPeriodic (void)
