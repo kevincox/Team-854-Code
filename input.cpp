@@ -33,13 +33,11 @@ void Input::update()
 	bool s;
 
 	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
-	if ( s && !bFlipState ) bFlipPressed = true;
+	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
 }
 
 bool Input::driveFlipped()
 {
-	bool r = bFlipPressed;
-	bFlipPressed = false;
-	return r;
+	return driveIsFlipped;
 }

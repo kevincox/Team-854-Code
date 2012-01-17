@@ -27,18 +27,24 @@ Drive::~Drive()
 
 void Drive::calculate()
 {
-	leftSpeed = rightSpeed = velocity.y;
+	leftSpeed = rightSpeed = velocity.y; // Foreward velocity.
 
-	leftSpeed += velocity.x;
-	rightSpeed -= velocity.x;
+	leftSpeed  += velocity.x; // Modify by the turn.
+	rightSpeed -= velocity.x; //
 
-	leftSpeed *= leftCorrection;
-	rightSpeed *= rightCorrection;
+	leftSpeed  *= leftCorrection;  // Apply the wheel correction factor.
+	rightSpeed *= rightCorrection; //
 
 	double scale = 1/max(max(fabs(leftSpeed), fabs(rightSpeed)), 1);
 
-	leftSpeed *= scale;
+	leftSpeed  *= scale; // Scale to the `-1 < speed < 1` range.
 	rightSpeed *= scale;
+
+	if (flipped) // We are driving backwards.
+	{
+		leftSpeed  *= -1; // Apply reversal.
+		rightSpeed *= -1; //
+	}
 
 	//fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
 }

@@ -59,6 +59,8 @@ public:
 	{
 		inputs->update();
 
+		drive->setFlip(inputs->driveFlipped());
+
 		drive->setVelocity(inputs->driveDirection());
 		drive->calculate();
 
