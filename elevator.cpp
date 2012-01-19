@@ -1,5 +1,8 @@
 #include "elevator.hpp"
 
+const static Elevator::ElevatorPosition drivePos;
+const static Elevator::ElevatorPosition shootPos;
+
 Elevator::Elevator(SpeedController *top, SpeedController *bottom,
                     Encoder *eTop, Encoder *eBottom,
                     DigitalInput *iTop, DigitalInput *iIn,
@@ -43,4 +46,15 @@ bool Elevator::isFull(void)
 	{
 		return false;
 	}
+}
+
+Elevator::ElevatorPosition Elevator::getPosition()
+{
+	return pos;
+}
+
+Elevator *Elevator::setPosition(Elevator::ElevatorPosition pos)
+{
+	this->pos = pos;
+	return this;
 }
