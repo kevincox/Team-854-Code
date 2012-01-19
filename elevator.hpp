@@ -10,6 +10,12 @@
 
 class Elevator
 {
+	typedef unit8_t ElevatorPosition;
+	const static ElevatorPosition drivePos;
+	const static ElevatorPosition ShootPos;
+
+	ElevatorPosition pos;
+
 	Ball *ball1, *ball2, *ball3;
 
 	SpeedController *top, *bottom;
@@ -36,6 +42,9 @@ public:
 	void testSensor ();
 	
 	bool isFull(void);
+
+	ElevatorPosition getPosition(void);
+	Elevator *setPosition(ElevatorPosition pos);
 
 };
 
