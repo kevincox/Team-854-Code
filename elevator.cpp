@@ -19,7 +19,7 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 
 Elevator *Elevator::calculate()
 {
-
+	
 
 	return this;
 }
@@ -43,4 +43,27 @@ bool Elevator::isFull(void)
 	{
 		return false;
 	}
+}
+
+Elevator* Elevator::shoot()
+{
+	return this;
+}
+
+Elevator* Elevator::shootPos()
+{
+	//not smart, look it over
+	top->Set(move);
+	bottom->Set(-move);
+	return this;
+}
+
+Elevator* Elevator::pickUpPos()
+{
+	return this;
+}
+
+void Elevator::testSensor()
+{
+	fprintf(stderr, "%i", iIn->Get());
 }

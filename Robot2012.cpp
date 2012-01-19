@@ -18,14 +18,19 @@ void Robot2012::RobotInit ()
 	inputs = new Input();
 
 	cerr << "Loading Motor Controllers" << endl;
-	ml = new Jaguar(constants.motorLSlot, constants.motorLChannel);
-	mr = new Jaguar(constants.motorRSlot, constants.motorRChannel);
+	ml = new Victor(constants.motorLSlot, constants.motorLChannel);
+	mr = new Victor(constants.motorRSlot, constants.motorRChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
 
 	cerr << "Loading Output" << endl;
 	output = new DSOutput(this);
+	
+	cerr << "Loading Elevator" << endl;
+	elevatorSensorTop = new DigitalInput(constants.sensorElevatorTopSlot,
+	                                      constants.sensorElevatorTopChannel);
+	elevator = new Elevator(NULL, NULL, NULL, NULL, NULL, elevatorSensorTop, NULL);
 
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;

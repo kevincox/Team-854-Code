@@ -19,6 +19,8 @@ public:
 	double getBegining();
 	double getCenter(void);
 	double getEnd(void);
+	
+	double move(double distance);
 };
 
 #endif // BALL_H

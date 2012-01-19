@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "WPILib.h"
+#include <Victor.h>
 
 class Robot2012;
 
@@ -13,6 +14,7 @@ class Robot2012;
 #include "input.hpp"
 #include "sensor.hpp"
 #include "dsoutput.hpp"
+#include "elevator.hpp"
 
 class Robot2012 : public IterativeRobot
 {
@@ -22,6 +24,9 @@ public:
 
 	Input *inputs;
 	Sensor *sensors;
+	
+	Elevator *elevator;
+	DigitalInput *elevatorSensorTop;
 
 	DSOutput *output;
 

@@ -21,6 +21,9 @@ struct Constants
 
 	const double jsDriveMaxX;
 	const double jsDriveMaxY;
+	
+	const UINT32 sensorElevatorTopSlot;
+	const UINT32 sensorElevatorTopChannel;
 
 	const UINT32 jsDriveButtonReverse;
 
@@ -30,6 +33,10 @@ struct Constants
 	const double jsDriveDeadbandYMin;
 
 	const double ballDiameter;
+	
+	const double jsDriveButtonShoot;
+	const double jsDriveButtonShootPos;
+	const double jsDriveButtonPickUpPos;
 
 	Constants ( ):
 		motorLSlot(1),
@@ -45,13 +52,20 @@ struct Constants
 		jsDrivePort(1),		
 		jsDriveMaxX(1),
 		jsDriveMaxY(1),
+
+		sensorElevatorTopSlot(1),
+		sensorElevatorTopChannel(1),
 		
 		jsDriveButtonReverse(5),
 		jsDriveDeadbandXMax(0.05),
 		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),
 		jsDriveDeadbandYMin(-0.05),
-		ballDiameter(9)
+		ballDiameter(9),
+		
+		jsDriveButtonShoot(1),
+		jsDriveButtonShootPos(6),
+		jsDriveButtonPickUpPos(7)
 	{
 
 	}

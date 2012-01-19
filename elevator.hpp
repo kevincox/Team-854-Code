@@ -15,6 +15,7 @@ class Elevator
 	SpeedController *top, *bottom;
 	Encoder *eTop, *eBottom;
 	DigitalInput *iTop, *iIn, *iEnter;
+	double move;
 
 	void init (void);
 
@@ -27,6 +28,13 @@ public:
 
 	Elevator *calculate(void);
 	Elevator *update(void);
+
+	Elevator* shoot();
+	Elevator* shootPos();
+	Elevator* pickUpPos();
+	
+	void testSensor ();
+	
 	bool isFull(void);
 
 };

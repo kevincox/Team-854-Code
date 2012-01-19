@@ -40,3 +40,8 @@ double Ball::getEnd(void)
 {
 	return pos + radius;
 }
+
+double Ball::move(double distance)
+{
+	return pos += distance;
+}
