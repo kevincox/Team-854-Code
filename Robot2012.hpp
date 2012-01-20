@@ -27,6 +27,8 @@ public:
 	
 	Elevator *elevator;
 	DigitalInput *elevatorSensorTop;
+	DigitalInput *elevatorSensorIn;
+	DigitalInput *elevatorSensorEnter;
 
 	DSOutput *output;
 

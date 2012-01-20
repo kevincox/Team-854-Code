@@ -24,7 +24,8 @@ private:
 	SpeedController *top, *bottom;
 	Encoder *eTop, *eBottom;
 	DigitalInput *iTop, *iIn, *iEnter;
-	double move;
+
+	double moving; //to tell if elevator is in motion
 
 	void init (void);
 
@@ -41,7 +42,8 @@ public:
 	Elevator* shoot();
 	Elevator* shootPos();
 	Elevator* pickUpPos();
-	
+	Elevator* stopMoving();
+
 	void testSensor ();
 	
 	bool isFull(void);

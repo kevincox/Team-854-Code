@@ -20,6 +20,7 @@ public:
 	Vector driveDirection();
 	void update();
 	bool driveFlipped();
+	void elevator();
 };
 
 #endif

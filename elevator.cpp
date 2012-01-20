@@ -52,16 +52,35 @@ Elevator* Elevator::shoot()
 
 Elevator* Elevator::shootPos()
 {
-	//not smart, look it over
-	top->Set(move);
-	bottom->Set(-move);
+	//don't know if 1 is right, needs a value
+	top->Set(1);
+	bottom->Set(1);
+
+	moving = 1;
 	return this;
 }
 
 Elevator* Elevator::pickUpPos()
 {
+	//don't know if 1 is right, needs a value
+	top->Set(-1);
+	bottom->Set(-1);
+
+	moving = 1;
 	return this;
 }
+
+Elevator* Elevator::stopMoving() //don't know if it goes in periodic or continuous check. put in periodic.
+{
+	if ((moving != 0) && ((iTop = 1) || (iIn = 1)))
+	{
+		top->Set(0);
+		bottom->Set(0);
+		moving = 0;
+	}
+	return this;
+}
+
 
 void Elevator::testSensor()
 {

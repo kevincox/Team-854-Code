@@ -42,3 +42,10 @@ bool Input::driveFlipped()
 {
 	return driveIsFlipped;
 }
+
+void Input::elevator () //goes in periodic or continuous checking? in continuous now.
+{
+	if (jsDriveButtonShootPos) Elevator->shootPos();
+	if (jsDriveButtonPickUpPos) Elevator->pickUpPos();
+	if (jsDriveButtonShoot) Elevator->shoot();
+}

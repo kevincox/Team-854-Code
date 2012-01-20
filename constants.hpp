@@ -24,6 +24,11 @@ struct Constants
 	
 	const UINT32 sensorElevatorTopSlot;
 	const UINT32 sensorElevatorTopChannel;
+	const UINT32 sensorElevatorInSlot;
+	const UINT32 sensorElevatorInChannel;
+	const UINT32 sensorElevatorEnterSlot;
+	const UINT32 sensorElevatorEnterChannel;
+
 
 	const UINT32 jsDriveButtonReverse;
 
@@ -55,6 +60,12 @@ struct Constants
 
 		sensorElevatorTopSlot(1),
 		sensorElevatorTopChannel(9),
+		sensorElevatorInSlot(1),
+		sensorElevatorInChannel(9), //same channel?
+		sensorElevatorEnterSlot (1),
+		sensorElevatorEnterChannel(9), //same channel?
+
+
 		
 		jsDriveButtonReverse(5),
 		jsDriveDeadbandXMax(0.05),

@@ -30,7 +30,13 @@ void Robot2012::RobotInit ()
 	cerr << "Loading Elevator" << endl;
 	elevatorSensorTop = new DigitalInput(constants.sensorElevatorTopSlot,
 	                                      constants.sensorElevatorTopChannel);
-	elevator = new Elevator(NULL, NULL, NULL, NULL, NULL, elevatorSensorTop, NULL);
+	elevatorSensorIn = new DigitalInput(constants.sensorElevatorInSlot,
+											constants.sensorElevatorInChannel);
+	elevatorSensorEnter = new DigitalInput(constants.sensorElevatorEnterSlot,
+												constants.sensorElevatorEnterChannel);
+	elevator = new Elevator(NULL, NULL,
+							NULL, NULL,
+							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
 
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
@@ -66,6 +72,9 @@ void Robot2012::TeleopPeriodic (void)
 void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
+
+	inputs->elevator();
+	elevator->stopMoving();
 
 	drive->setFlip(inputs->driveFlipped());
 
