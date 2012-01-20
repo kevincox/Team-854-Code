@@ -54,7 +54,7 @@ struct Constants
 		jsDriveMaxY(1),
 
 		sensorElevatorTopSlot(1),
-		sensorElevatorTopChannel(1),
+		sensorElevatorTopChannel(9),
 		
 		jsDriveButtonReverse(5),
 		jsDriveDeadbandXMax(0.05),

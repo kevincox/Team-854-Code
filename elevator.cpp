@@ -1,8 +1,5 @@
 #include "elevator.hpp"
 
-const static Elevator::ElevatorPosition drivePos;
-const static Elevator::ElevatorPosition shootPos;
-
 Elevator::Elevator(SpeedController *top, SpeedController *bottom,
                     Encoder *eTop, Encoder *eBottom,
                     DigitalInput *iTop, DigitalInput *iIn,
@@ -68,7 +65,7 @@ Elevator* Elevator::pickUpPos()
 
 void Elevator::testSensor()
 {
-	fprintf(stderr, "%i", iIn->Get());
+	fprintf(stderr, "%d", iIn->Get());
 }
 
 Elevator::ElevatorPosition Elevator::getPosition()

@@ -38,7 +38,7 @@ void Robot2012::RobotInit ()
 
 void Robot2012::DisabledPeriodic (void)
 {
-	output->update();	
+	output->update();
 }
 
 void Robot2012::DisabledContinuous(void)
@@ -59,6 +59,7 @@ void Robot2012::AutonomousContinuous(void)
 void Robot2012::TeleopPeriodic (void)
 {
 	output->update();
+	elevator->testSensor();
 	//cerr << sensors->getAccelVal(1) << endl;
 }
 

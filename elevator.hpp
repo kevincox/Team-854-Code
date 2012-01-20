@@ -10,9 +10,12 @@
 
 class Elevator
 {
-	typedef unit8_t ElevatorPosition;
-	const static ElevatorPosition drivePos;
-	const static ElevatorPosition ShootPos;
+public:
+	typedef UINT8 ElevatorPosition;
+	
+private:
+	const static ElevatorPosition drivePos = 1;
+	const static ElevatorPosition ShootPos = 2;
 
 	ElevatorPosition pos;
 
