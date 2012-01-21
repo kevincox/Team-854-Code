@@ -17,9 +17,9 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 	this->iEnter = iEnter;
 }
 
-Elevator *Elevator::calculate()
+Elevator *Elevator::update()
 {
-	
+
 
 	return this;
 }
