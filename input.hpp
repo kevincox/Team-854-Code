@@ -16,8 +16,8 @@ private:
 	bool shootPosButtonPressedBefore;
 	bool pickUpPosButtonPressedBefore;
 	bool driveIsFlipped;
-	
-	int shoot;
+
+	int numOfBallsToShoot;
 	int shootPos;
 	int pickUp;
 
@@ -29,7 +29,7 @@ public:
 	void update();
 	int getShoot();
 	bool driveFlipped();
-	
+
 };
 
 #endif

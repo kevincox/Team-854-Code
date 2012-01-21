@@ -82,6 +82,7 @@ void Robot2012::TeleopContinuous (void)
 	drive->calculate();
 
 	drive->update();
+	elevator->shoot(inputs->numOfBallsToShoot);
 }
 
 START_ROBOT_CLASS(Robot2012);
