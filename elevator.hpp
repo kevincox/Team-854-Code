@@ -25,11 +25,13 @@ private:
 	Encoder *eTop, *eBottom;
 	DigitalInput *iTop, *iIn, *iEnter;
 
-	double moving; //to tell if elevator is in motion
+	double speed;
 
 	int ballsToShoot;
 
-	void init (void);
+	void init(void);
+	void newBall(void);
+	void rotateBall(void);
 
 public:
 	Elevator(SpeedController *top, SpeedController *bottom,

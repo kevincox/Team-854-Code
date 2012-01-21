@@ -22,10 +22,28 @@ Elevator *Elevator::calculate()
 	if (!ball1)
 	{
 		ballsToShoot = 0;
-		canve
+		speed = 0;
 	}
-
-	if (ballsToShoot)
+	else if (ballsToShoot > 0)
+	{
+		speed = 1;
+		rotateBalls();
+	}
+	else
+	{
+		if (pos == drivePos)
+		{
+			if (iIn == 1) speed = 0;
+			else speed = -1;
+		}
+		else if (pos == shootPos)
+		{
+			if (iTop == 1) speed = 0;
+			else speed = 1;
+		}
+	}
+	else cerr << "[Elevator::calculate()] This should not be printed." << endl;
+	return this;
 }
 
 Elevator *Elevator::update()
@@ -44,16 +62,26 @@ void Elevator::init()
 	ball1 = ball2 = ball3 = NULL;
 }
 
+void Elevator::newBall (void)
+{
+	Ball *b = new Ball(0);
+
+	if      (!ball1) ball1 = b;
+	else if (!ball2) ball2 = b;
+	else if (!ball3) ball3 = b;
+	else cerr << "Too many balls." << endl;
+}
+
+void Elevator::rotateBall ()
+{
+	ball1 = ball2;
+	ball2 = ball3;
+	ball3 = NULL;
+}
+
 bool Elevator::isFull(void)
 {
-	if(ball3 != NULL)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return ball3 != NULL;
 }
 
 Elevator* Elevator::shoot(int numBalls)
@@ -73,18 +101,6 @@ Elevator* Elevator::pickUpPosition()
 	pos = drivePos;
 	return this;
 }
-
-Elevator* Elevator::stopMoving() //don't know if it goes in periodic or continuous check. put in periodic.
-{
-	if ((moving != 0) && ((iTop->Get() == 1) || (iIn->Get() == 1)))
-	{
-		top->Set(0);
-		bottom->Set(0);
-		moving = 0;
-	}
-	return this;
-}
-
 
 void Elevator::testSensor()
 {

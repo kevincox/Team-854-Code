@@ -74,6 +74,7 @@ void Robot2012::TeleopContinuous (void)
 	inputs->update();
 
 	elevator->update();
+	brush->update();
 
 	drive->setFlip(inputs->driveFlipped());
 

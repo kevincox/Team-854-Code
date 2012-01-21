@@ -60,9 +60,9 @@ struct Constants
 		sensorElevatorTopSlot(1),
 		sensorElevatorTopChannel(9),
 		sensorElevatorInSlot(1),
-		sensorElevatorInChannel(9), //same channel?
+		sensorElevatorInChannel(10),
 		sensorElevatorEnterSlot (1),
-		sensorElevatorEnterChannel(9), //same channel?
+		sensorElevatorEnterChannel(11),
 
 
 		
