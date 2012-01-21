@@ -36,7 +36,7 @@ public:
 	          DigitalInput *iEnter
 	        );
 
-	Elevator *calculate(void);
+	Elevator *update(void);
 	Elevator *update(void);
 
 	Elevator* shoot();

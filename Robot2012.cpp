@@ -26,7 +26,7 @@ void Robot2012::RobotInit ()
 
 	cerr << "Loading Output" << endl;
 	output = new DSOutput(this);
-	
+
 	cerr << "Loading Elevator" << endl;
 	elevatorSensorTop = new DigitalInput(constants.sensorElevatorTopSlot,
 	                                      constants.sensorElevatorTopChannel);
@@ -49,17 +49,17 @@ void Robot2012::DisabledPeriodic (void)
 
 void Robot2012::DisabledContinuous(void)
 {
-	
+
 }
 
 void Robot2012::AutonomousPeriodic (void)
 {
-	output->update();	
+	output->update();
 }
 
 void Robot2012::AutonomousContinuous(void)
 {
-	
+
 }
 
 void Robot2012::TeleopPeriodic (void)
@@ -73,8 +73,7 @@ void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
 
-	inputs->elevator();
-	elevator->stopMoving();
+	elevator->update();
 
 	drive->setFlip(inputs->driveFlipped());
 
