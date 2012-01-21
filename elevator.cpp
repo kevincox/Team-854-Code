@@ -17,9 +17,20 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 	this->iEnter = iEnter;
 }
 
+Elevator *Elevator::calculate()
+{
+	if (!ball1)
+	{
+		ballsToShoot = 0;
+		canve
+	}
+
+	if (ballsToShoot)
+}
+
 Elevator *Elevator::update()
 {
-
+	Elevator->calculate();
 
 	return this;
 }
@@ -45,28 +56,21 @@ bool Elevator::isFull(void)
 	}
 }
 
-Elevator* Elevator::shoot()
+Elevator* Elevator::shoot(int numBalls)
 {
+	ballsToShoot += numballs;
 	return this;
 }
 
-Elevator* Elevator::shootPos()
+Elevator* Elevator::shootPosition()
 {
-	//don't know if 1 is right, needs a value
-	top->Set(1);
-	bottom->Set(1);
-
-	moving = 1;
+	pos = shootPos;
 	return this;
 }
 
-Elevator* Elevator::pickUpPos()
+Elevator* Elevator::pickUpPosition()
 {
-	//don't know if 1 is right, needs a value
-	top->Set(-1);
-	bottom->Set(-1);
-
-	moving = 1;
+	pos = drivePos;
 	return this;
 }
 
