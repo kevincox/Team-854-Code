@@ -37,14 +37,29 @@ void Input::update()
 	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
 	
-	if (jsDrive.GetRawButton(constants.jsDriveButtonShoot)) shoot++;
+	bool shootButton;
+	
+	shootButton = jsDrive.GetRawButton(constants.jsDriveButtonShoot);
+	if (shootButton && !shootButtonPressedBefore) shoot++;
+	shootButtonPressedBefore = shootButton;
+	
+	bool shootPosButton;
+	
+	shootPosButton = jsDrive.GetRawButton(constants.jsDriveButtonShootPos);
+	if(shootPosButton && !shootPosButtonPressedBefore) shootPos++;
+	shootPosButtonPressedBefore = shootPosButton;
+	
+	bool pickUpPosButton;
+	
+	pickUpPosButton = jsDrive.GetRawButton(constants.jsDriveButtonPickUpPos);
+	if(pickUpPosButton && !pickUpPosButtonPressedBefore)pickUp++;
+	pickUpPosButtonPressedBefore = pickUpPosButton;
 }
 
-int Input::getShoot()
+/*int Input::ballsToShoot()
 {
-	shoot--;
-	return shoot + 1;
-}
+	
+}*/
 
 bool Input::driveFlipped()
 {

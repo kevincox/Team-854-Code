@@ -12,9 +12,15 @@ private:
 	Vector driveDir;
 
 	bool bFlipState;
+	bool shootButtonPressedBefore;
+	bool shootPosButtonPressedBefore;
+	bool pickUpPosButtonPressedBefore;
 	bool driveIsFlipped;
 	
 	int shoot;
+	int shootPos;
+	int pickUp;
+
 public:
 	Input();
 	~Input();

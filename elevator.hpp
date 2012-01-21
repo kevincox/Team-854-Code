@@ -13,10 +13,10 @@ class Elevator
 public:
 	typedef UINT8 ElevatorPosition;
 	
-private:
 	const static ElevatorPosition drivePos = 1;
 	const static ElevatorPosition ShootPos = 2;
 
+private:
 	ElevatorPosition pos;
 
 	Ball *ball1, *ball2, *ball3;

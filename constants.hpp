@@ -31,6 +31,9 @@ struct Constants
 
 
 	const UINT32 jsDriveButtonReverse;
+	const UINT32 jsDriveButtonShoot;
+	const UINT32 jsDriveButtonShootPos;
+	const UINT32 jsDriveButtonPickUpPos;
 
 	const double jsDriveDeadbandXMax;
 	const double jsDriveDeadbandXMin;
@@ -38,10 +41,6 @@ struct Constants
 	const double jsDriveDeadbandYMin;
 
 	const double ballDiameter;
-	
-	const double jsDriveButtonShoot;
-	const double jsDriveButtonShootPos;
-	const double jsDriveButtonPickUpPos;
 
 	Constants ( ):
 		motorLSlot(1),
@@ -68,15 +67,14 @@ struct Constants
 
 		
 		jsDriveButtonReverse(5),
+		jsDriveButtonShoot(1),
+		jsDriveButtonShootPos(6),
+		jsDriveButtonPickUpPos(7),
 		jsDriveDeadbandXMax(0.05),
 		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),
 		jsDriveDeadbandYMin(-0.05),
-		ballDiameter(9),
-		
-		jsDriveButtonShoot(1),
-		jsDriveButtonShootPos(6),
-		jsDriveButtonPickUpPos(7)
+		ballDiameter(9)
 	{
 
 	}
