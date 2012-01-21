@@ -13,14 +13,17 @@ private:
 
 	bool bFlipState;
 	bool driveIsFlipped;
+	
+	int shoot;
 public:
 	Input();
 	~Input();
 
 	Vector driveDirection();
 	void update();
+	int getShoot();
 	bool driveFlipped();
-	void elevator();
+	
 };
 
 #endif

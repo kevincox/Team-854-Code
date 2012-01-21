@@ -72,7 +72,7 @@ Elevator* Elevator::pickUpPos()
 
 Elevator* Elevator::stopMoving() //don't know if it goes in periodic or continuous check. put in periodic.
 {
-	if ((moving != 0) && ((iTop = 1) || (iIn = 1)))
+	if ((moving != 0) && ((iTop->Get() == 1) || (iIn->Get() == 1)))
 	{
 		top->Set(0);
 		bottom->Set(0);

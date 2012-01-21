@@ -36,16 +36,17 @@ void Input::update()
 	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
 	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
+	
+	if (jsDrive.GetRawButton(constants.jsDriveButtonShoot)) shoot++;
+}
+
+int Input::getShoot()
+{
+	shoot--;
+	return shoot + 1;
 }
 
 bool Input::driveFlipped()
 {
 	return driveIsFlipped;
-}
-
-void Input::elevator () //goes in periodic or continuous checking? in continuous now.
-{
-	if (jsDriveButtonShootPos) Elevator->shootPos();
-	if (jsDriveButtonPickUpPos) Elevator->pickUpPos();
-	if (jsDriveButtonShoot) Elevator->shoot();
 }
