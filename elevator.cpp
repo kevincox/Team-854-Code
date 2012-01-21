@@ -58,7 +58,7 @@ bool Elevator::isFull(void)
 
 Elevator* Elevator::shoot(int numBalls)
 {
-	ballsToShoot += numballs;
+	ballsToShoot += numBalls;
 	return this;
 }
 
