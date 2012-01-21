@@ -8,7 +8,6 @@ private:
 	SpeedController *motor;
 	double speed;
 
-
 public:
 
 	PickerUpper(SpeedController *motor);
@@ -17,6 +16,8 @@ public:
 	void spin();
 	void reverseDirection();
 	void update();
+	void setSpeed(int speed);
+	double getSpeed();
 
 };
 
