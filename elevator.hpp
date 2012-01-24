@@ -14,7 +14,7 @@ public:
 	typedef UINT8 ElevatorPosition;
 	
 	const static ElevatorPosition drivePos = 1;
-	const static ElevatorPosition ShootPos = 2;
+	const static ElevatorPosition shootPos = 2;
 
 private:
 	ElevatorPosition pos;
@@ -25,9 +25,13 @@ private:
 	Encoder *eTop, *eBottom;
 	DigitalInput *iTop, *iIn, *iEnter;
 
-	double moving; //to tell if elevator is in motion
+	double speed;
 
-	void init (void);
+	int ballsToShoot;
+
+	void init(void);
+	void newBall(void);
+	void rotateBalls(void);
 
 public:
 	Elevator(SpeedController *top, SpeedController *bottom,
@@ -36,11 +40,12 @@ public:
 	          DigitalInput *iEnter
 	        );
 
+	Elevator *calculate (void);
 	Elevator *update(void);
 
-	Elevator* shoot();
-	Elevator* shootPos();
-	Elevator* pickUpPos();
+	Elevator* shoot(int numBalls);
+	Elevator* shootPosition();
+	Elevator* pickUpPosition();
 	Elevator* stopMoving();
 
 	void testSensor ();

@@ -15,6 +15,7 @@ class Robot2012;
 #include "sensor.hpp"
 #include "dsoutput.hpp"
 #include "elevator.hpp"
+#include "pickerupper.hpp"
 
 class Robot2012 : public IterativeRobot
 {
@@ -29,6 +30,8 @@ public:
 	DigitalInput *elevatorSensorTop;
 	DigitalInput *elevatorSensorIn;
 	DigitalInput *elevatorSensorEnter;
+	
+	PickerUpper *brush;
 
 	DSOutput *output;
 

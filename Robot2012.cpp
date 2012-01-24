@@ -37,7 +37,9 @@ void Robot2012::RobotInit ()
 	elevator = new Elevator(NULL, NULL,
 							NULL, NULL,
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
-
+	cerr << "Loading Picker Upper" << endl;
+	brush = new PickerUpper(NULL);
+	
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
 }
@@ -73,6 +75,7 @@ void Robot2012::TeleopContinuous (void)
 	inputs->update();
 
 	elevator->update();
+	brush->update();
 
 	drive->setFlip(inputs->driveFlipped());
 
@@ -80,6 +83,7 @@ void Robot2012::TeleopContinuous (void)
 	drive->calculate();
 
 	drive->update();
+	elevator->shoot(inputs->getNumOfBallsToShoot());
 }
 
 START_ROBOT_CLASS(Robot2012);

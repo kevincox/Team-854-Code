@@ -17,10 +17,39 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 	this->iEnter = iEnter;
 }
 
+Elevator *Elevator::calculate()
+{
+	if (!ball1)
+	{
+		ballsToShoot = 0;
+		speed = 0;
+	}
+	else if (ballsToShoot > 0)
+	{
+		speed = 1;
+		rotateBalls();
+	}
+	else if (ballsToShoot == 0)
+	{
+		if (pos == drivePos)
+		{
+			if (iIn->Get() == 1) speed = 0;
+			else speed = -1;
+		}
+		else if (pos == shootPos)
+		{
+			if (iTop->Get() == 1) speed = 0;
+			else speed = 1;
+		}
+	}
+	else cerr << "[Elevator::calculate()] This should not be printed." << endl;
+	return this;
+}
+
 Elevator *Elevator::update()
 {
-
-
+	top->Set(speed);
+	bottom->Set(speed);
 	return this;
 }
 
@@ -33,52 +62,49 @@ void Elevator::init()
 	ball1 = ball2 = ball3 = NULL;
 }
 
+void Elevator::newBall (void)
+{
+	Ball *b = new Ball(0);
+
+	if      (!ball1) ball1 = b;
+	else if (!ball2) ball2 = b;
+	else if (!ball3) ball3 = b;
+	else cerr << "Too many balls." << endl;
+}
+
+void Elevator::rotateBalls ()
+{
+	ball1 = ball2;
+	ball2 = ball3;
+	ball3 = NULL;
+}
+
 bool Elevator::isFull(void)
 {
-	if(ball3 != NULL)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return ball3 != NULL;
 }
 
-Elevator* Elevator::shoot()
+Elevator* Elevator::shoot(int numBalls)
 {
+	ballsToShoot += numBalls;
 	return this;
 }
 
-Elevator* Elevator::shootPos()
+Elevator* Elevator::shootPosition()
 {
-	//don't know if 1 is right, needs a value
-	top->Set(1);
-	bottom->Set(1);
-
-	moving = 1;
+	pos = shootPos;
 	return this;
 }
 
-Elevator* Elevator::pickUpPos()
+Elevator* Elevator::pickUpPosition()
 {
-	//don't know if 1 is right, needs a value
-	top->Set(-1);
-	bottom->Set(-1);
-
-	moving = 1;
+	pos = drivePos;
 	return this;
 }
 
-Elevator* Elevator::stopMoving() //don't know if it goes in periodic or continuous check. put in periodic.
+void Elevator::testSensor()
 {
-	if ((moving != 0) && ((iTop->Get() == 1) || (iIn->Get() == 1)))
-	{
-		top->Set(0);
-		bottom->Set(0);
-		moving = 0;
-	}
-	return this;
+	fprintf(stderr, "%d", iIn->Get());
 }
 
 Elevator::ElevatorPosition Elevator::getPosition()
