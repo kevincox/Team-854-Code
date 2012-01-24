@@ -47,6 +47,7 @@ void Input::update()
 	
 	shootPosButton = jsDrive.GetRawButton(constants.jsDriveButtonShootPos);
 	if(shootPosButton && !shootPosButtonPressedBefore) shootPos++;
+	
 	shootPosButtonPressedBefore = shootPosButton;
 	
 	bool pickUpPosButton;

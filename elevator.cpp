@@ -81,12 +81,6 @@ Elevator* Elevator::stopMoving() //don't know if it goes in periodic or continuo
 	return this;
 }
 
-
-void Elevator::testSensor()
-{
-	fprintf(stderr, "%d", iIn->Get());
-}
-
 Elevator::ElevatorPosition Elevator::getPosition()
 {
 	return pos;
