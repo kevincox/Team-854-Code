@@ -18,7 +18,7 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 }
 
 Elevator *Elevator::calculate()
-{
+{	
 	if (!ball1)
 	{
 		ballsToShoot = 0;
@@ -115,5 +115,17 @@ Elevator::ElevatorPosition Elevator::getPosition()
 Elevator *Elevator::setPosition(Elevator::ElevatorPosition pos)
 {
 	this->pos = pos;
+	return this;
+}
+
+Elevator *Elevator::calculateBalls()
+{
+	if (iEnter)
+	{
+		ball3 = ball2;
+		ball2 = ball1;
+		ball1 = new ball();
+	}
+	
 	return this;
 }

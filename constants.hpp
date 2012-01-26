@@ -14,6 +14,8 @@ struct Constants
 	const UINT32 bottomElevatorMotorChannel;
 	const UINT32 topElevatorMotorSlot;
 	const UINT32 topElevatorMotorChannel;
+	const UINT32 brushMotorSlot;
+	const UINT32 brushMotorChannel;
 
 	const double motorLCorrection;
 	const double motorRCorrection;
@@ -40,6 +42,8 @@ struct Constants
 	const UINT32 jsDriveButtonShoot;
 	const UINT32 jsDriveButtonShootPos;
 	const UINT32 jsDriveButtonPickUpPos;
+	const UINT32 jsDriveButtonSweeperForwards;
+	const UINT32 jsDriveButtonSweeperBackwards;
 
 	const double jsDriveDeadbandXMax;
 	const double jsDriveDeadbandXMin;
@@ -51,7 +55,7 @@ struct Constants
 	const double PickerUpperForwardsSpeed;
 	const double PickerUpperBackwardsSpeed;
 
-	Constants ( ):
+	Constants ():
 		motorLSlot(1),
 		motorLChannel(1),
 		motorRSlot(1),
@@ -60,6 +64,8 @@ struct Constants
 		bottomElevatorMotorChannel(3),//Change later
 		topElevatorMotorSlot(1),
 		topElevatorMotorChannel(4),//Change later
+		brushMotorSlot(1),
+		brushMotorChannel(5),
 		motorLCorrection(-1),
 		motorRCorrection(1),
 		bottomElevatorMotorCorrection(1),
@@ -85,6 +91,8 @@ struct Constants
 		jsDriveButtonShoot(1),
 		jsDriveButtonShootPos(6),
 		jsDriveButtonPickUpPos(7),
+		jsDriveButtonSweeperForwards(11),
+		jsDriveButtonSweeperBackwards(10),
 		jsDriveDeadbandXMax(0.05),
 		jsDriveDeadbandXMin(-0.05),
 		jsDriveDeadbandYMax(0.05),

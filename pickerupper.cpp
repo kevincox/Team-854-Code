@@ -10,10 +10,10 @@ PickerUpper::~PickerUpper()
 {
 }
 
-PickerUpper *PickerUpper::reverseDirection()
+PickerUpper *PickerUpper::reverseDirection(bool forwards, bool backwards)
 {
-	if(speed < 0) this->goForwards();
-	else if(speed > 0) this->goBackwards();
+	if(!(forwards&&backwards)&& forwards)this->goForwards();
+	else if(!(forwards&&backwards)&& backwards)this->goBackwards();
 	update();
 	return this;
 }
@@ -47,4 +47,10 @@ PickerUpper *PickerUpper::goBackwards()
 	if(speed > 0)speed *= -1;
 	if(speed == 0)speed = constants.PickerUpperBackwardsSpeed;
 	return this;
+}
+
+bool PickerUpper::isForward()
+{
+	if (speed >= 0) return true;
+	else            return false;
 }

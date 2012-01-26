@@ -10,7 +10,6 @@ using namespace std;
 class Robot2012;
 
 #include "drive.hpp"
-#include "constants.hpp"
 #include "input.hpp"
 #include "sensor.hpp"
 #include "dsoutput.hpp"
@@ -21,7 +20,7 @@ class Robot2012 : public IterativeRobot
 {
 public:
 	Drive *drive;
-	SpeedController *ml, *mr;
+	SpeedController *ml, *mr, *eb, *et, *b;
 
 	Input *inputs;
 	Sensor *sensors;

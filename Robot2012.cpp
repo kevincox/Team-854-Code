@@ -20,6 +20,9 @@ void Robot2012::RobotInit ()
 	cerr << "Loading Motor Controllers" << endl;
 	ml = new Victor(constants.motorLSlot, constants.motorLChannel);
 	mr = new Victor(constants.motorRSlot, constants.motorRChannel);
+	eb = new Victor(constants.bottomElevatorMotorSlot, constants.bottomElevatorMotorChannel);
+	et = new Victor(constants.topElevatorMotorSlot, constants.topElevatorMotorChannel);
+	b = new Victor(constants.brushMotorSlot, constants.brushMotorChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -34,11 +37,11 @@ void Robot2012::RobotInit ()
 											constants.sensorElevatorInChannel);
 	elevatorSensorEnter = new DigitalInput(constants.sensorElevatorEnterSlot,
 												constants.sensorElevatorEnterChannel);
-	elevator = new Elevator(NULL, NULL,
+	elevator = new Elevator(et, eb,
 							NULL, NULL,
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
 	cerr << "Loading Picker Upper" << endl;
-	brush = new PickerUpper(NULL);
+	brush = new PickerUpper(b);
 	
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
@@ -47,6 +50,7 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
+	brush->setSpeed(0);
 }
 
 void Robot2012::DisabledContinuous(void)
@@ -67,23 +71,27 @@ void Robot2012::AutonomousContinuous(void)
 void Robot2012::TeleopPeriodic (void)
 {
 	output->update();
+	elevator->testSensor();
 	//cerr << sensors->getAccelVal(1) << endl;
 }
 
 void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
+	
+	elevator->shoot(inputs->getNumOfBallsToShoot());
 
-	elevator->update();
-	brush->update();
+	brush->reverseDirection(inputs->getForwardsButtonPressed(), inputs->getBackwardsButtonPressed());
 
 	drive->setFlip(inputs->driveFlipped());
-
 	drive->setVelocity(inputs->driveDirection());
+	
+	elevator->calculate();
 	drive->calculate();
 
 	drive->update();
-	elevator->shoot(inputs->getNumOfBallsToShoot());
+	elevator->update();
+	brush->update();
 }
 
 START_ROBOT_CLASS(Robot2012);

@@ -33,6 +33,7 @@ void DSOutput::update()
 	out->PrintfLine(l2, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");
 	out->PrintfLine(l3, "L: % .4lf   R: % .4lf",
 	                 drive->getLeftSpeed(), drive->getRightSpeed());
-
+	out->PrintfLine(l4, "Sweeper %s reversed.", robot->brush->isForward()?"IS":"NOT");
+	out->PrintfLine(l5, "Elevator position is %d.", (int)robot->elevator->getPosition());
 	out->UpdateLCD();
 }

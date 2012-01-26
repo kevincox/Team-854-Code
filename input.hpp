@@ -15,7 +15,11 @@ private:
 	bool shootButtonPressedBefore;
 	bool shootPosButtonPressedBefore;
 	bool pickUpPosButtonPressedBefore;
+	bool forwardsButtonPressedBefore;
+	bool backwardsButtonPressedBefore;
 	bool driveIsFlipped;
+	bool forwardsButtonPressed;
+	bool backwardsButtonPressed;
 
 	int numOfBallsToShoot;
 	int shootPos;
@@ -30,6 +34,8 @@ public:
 	int getShoot();
 	bool driveFlipped();
 	int getNumOfBallsToShoot();
+	bool getForwardsButtonPressed();
+	bool getBackwardsButtonPressed();
 };
 
 #endif
