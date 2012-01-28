@@ -19,6 +19,7 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 
 Elevator *Elevator::calculate()
 {	
+	this->calculateBalls();
 	if (!ball1)
 	{
 		ballsToShoot = 0;
@@ -66,9 +67,9 @@ void Elevator::newBall (void)
 {
 	Ball *b = new Ball(0);
 
-	if      (!ball1) ball1 = b;
-	else if (!ball2) ball2 = b;
-	else if (!ball3) ball3 = b;
+	if      (!ball1) {ball1 = b; fprintf(stderr, "BALL 1");}
+	else if (!ball2) {ball2 = b; fprintf(stderr, "BALL 2");}
+	else if (!ball3) {ball3 = b; fprintf(stderr, "BALL 3");}
 	else cerr << "Too many balls." << endl;
 }
 
@@ -104,7 +105,7 @@ Elevator* Elevator::pickUpPosition()
 
 void Elevator::testSensor()
 {
-	fprintf(stderr, "%d", iIn->Get());
+	fprintf(stderr, "%d", iEnter->Get());
 }
 
 Elevator::ElevatorPosition Elevator::getPosition()
@@ -120,12 +121,21 @@ Elevator *Elevator::setPosition(Elevator::ElevatorPosition pos)
 
 Elevator *Elevator::calculateBalls()
 {
-	if (iEnter)
+	UINT32 iEnterOn = iEnter->Get();
+	
+	if (iEnterOn && !iEnterOnBefore)
 	{
-		ball3 = ball2;
-		ball2 = ball1;
-		ball1 = new ball();
+		this->newBall();
 	}
+	iEnterOnBefore = iEnterOn;
 	
 	return this;
+}
+
+int Elevator::getNumOfBalls()
+{
+	if (ball3 != NULL) return 3;
+	else if (ball2 != NULL) return 2;
+	else if (ball1 != NULL) return 1;
+	else return 0;
 }

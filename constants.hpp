@@ -79,11 +79,11 @@ struct Constants
 		jsDriveMaxY(1),
 
 		sensorElevatorTopSlot(1),
-		sensorElevatorTopChannel(9),
+		sensorElevatorTopChannel(5),
 		sensorElevatorInSlot(1),
-		sensorElevatorInChannel(10),
+		sensorElevatorInChannel(6),//plug sensor into this number + 2
 		sensorElevatorEnterSlot (1),
-		sensorElevatorEnterChannel(11),
+		sensorElevatorEnterChannel(7),
 
 
 

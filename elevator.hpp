@@ -29,6 +29,8 @@ private:
 
 	int ballsToShoot;
 
+	UINT32 iEnterOnBefore;
+	
 	void init(void);
 	void newBall(void);
 	void rotateBalls(void);
@@ -54,6 +56,8 @@ public:
 
 	ElevatorPosition getPosition(void);
 	Elevator *setPosition(ElevatorPosition pos);
+	Elevator *calculateBalls();
+	int getNumOfBalls(); 
 
 };
 
