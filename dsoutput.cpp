@@ -34,8 +34,12 @@ void DSOutput::update()
 	out->PrintfLine(l3, "L: % .4lf   R: % .4lf",
 	                 drive->getLeftSpeed(), drive->getRightSpeed());
 	out->PrintfLine(l4, "Sweeper %s reversed.", robot->brush->isForward()?"IS":"NOT");
-	out->PrintfLine(l5, "Elevator position is %d.", (int)robot->elevator->getPosition());
 	out->PrintfLine(l6, "Number of Balls: %d.", robot->elevator->getNumOfBalls());
-
+	switch (robot->elevator->getPosition())
+	{
+	case 1: out->PrintfLine(l5, "Elevator position is drive."); break;
+	case 2: out->PrintfLine(l5, "Elevator position is shoot."); break;
+	default: out->PrintfLine(l5, "uh oh"); break;
+	}
 	out->UpdateLCD();
 }

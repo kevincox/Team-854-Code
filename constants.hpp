@@ -41,7 +41,7 @@ struct Constants
 	const UINT32 jsDriveButtonReverse;
 	const UINT32 jsDriveButtonShoot;
 	const UINT32 jsDriveButtonShootPos;
-	const UINT32 jsDriveButtonPickUpPos;
+	const UINT32 jsDriveButtonDrivePos;
 	const UINT32 jsDriveButtonSweeperForwards;
 	const UINT32 jsDriveButtonSweeperBackwards;
 
@@ -90,7 +90,7 @@ struct Constants
 		jsDriveButtonReverse(5),
 		jsDriveButtonShoot(1),
 		jsDriveButtonShootPos(6),
-		jsDriveButtonPickUpPos(7),
+		jsDriveButtonDrivePos(7),
 		jsDriveButtonSweeperForwards(11),
 		jsDriveButtonSweeperBackwards(10),
 		jsDriveDeadbandXMax(0.05),

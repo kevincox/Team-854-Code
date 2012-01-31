@@ -80,6 +80,7 @@ void Robot2012::TeleopContinuous (void)
 	inputs->update();
 	
 	elevator->shoot(inputs->getNumOfBallsToShoot());
+	elevator->setPosition(inputs->getShootPos(), inputs->getDrivePos());
 
 	brush->reverseDirection(inputs->getForwardsButtonPressed(), inputs->getBackwardsButtonPressed());
 

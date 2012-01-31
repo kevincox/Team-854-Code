@@ -28,7 +28,7 @@ Elevator *Elevator::calculate()
 	else if (ballsToShoot > 0)
 	{
 		speed = 1;
-		rotateBalls();
+		doShoot();
 	}
 	else if (ballsToShoot == 0)
 	{
@@ -61,23 +61,42 @@ void Elevator::init()
 	iTop = iIn = iEnter = NULL;
 
 	ball1 = ball2 = ball3 = NULL;
+	ballsToShoot = 0;
 }
 
 void Elevator::newBall (void)
 {
-	Ball *b = new Ball(0);
-
-	if      (!ball1) {ball1 = b; fprintf(stderr, "BALL 1");}
-	else if (!ball2) {ball2 = b; fprintf(stderr, "BALL 2");}
-	else if (!ball3) {ball3 = b; fprintf(stderr, "BALL 3");}
+	if      (!ball1) fprintf(stderr, "BALL 1\n");
+	else if (!ball2) fprintf(stderr, "BALL 2\n");
+	else if (!ball3) fprintf(stderr, "BALL 3\n");
+	ball3 = ball2;
+	ball2 = ball1;
+	ball1 = new Ball(0);
+	if      (!ball1) fprintf(stderr, "BALL 1\n\n");
+	else if (!ball2) fprintf(stderr, "BALL 2\n\n");
+	else if (!ball3) fprintf(stderr, "BALL 3\n\n");
 	else cerr << "Too many balls." << endl;
 }
 
-void Elevator::rotateBalls ()
+Elevator *Elevator::doShoot ( void )
 {
-	ball1 = ball2;
-	ball2 = ball3;
-	ball3 = NULL;
+	if (ball3)
+	{
+		delete ball3;
+		ball3 = NULL;
+	}
+	else if (ball2)
+	{
+		delete ball2;
+		ball2 = NULL;
+	}
+	else if (ball1)
+	{
+		delete ball1;
+		ball1 = NULL;
+	}
+	else cerr << "AHHH! can't shoot no balls!\nBeware of the ghost ball." << endl;
+	return this;
 }
 
 bool Elevator::isFull(void)
@@ -87,7 +106,14 @@ bool Elevator::isFull(void)
 
 Elevator* Elevator::shoot(int numBalls)
 {
-	ballsToShoot += numBalls;
+	if((ballsToShoot + numBalls) <= 3) 
+		ballsToShoot += numBalls;
+	if(ballsToShoot == 3 && !ball3)
+		ballsToShoot --;
+	if(ballsToShoot == 2 && !ball2)
+		ballsToShoot--;
+	if(ballsToShoot == 1 && !ball1)
+		ballsToShoot--;
 	return this;
 }
 
@@ -113,9 +139,10 @@ Elevator::ElevatorPosition Elevator::getPosition()
 	return pos;
 }
 
-Elevator *Elevator::setPosition(Elevator::ElevatorPosition pos)
+Elevator *Elevator::setPosition(bool shootPos, bool drivePos)
 {
-	this->pos = pos;
+	if(shootPos && !drivePos) pos = shootPos;
+	else if(!shootPos && drivePos) pos = drivePos;
 	return this;
 }
 

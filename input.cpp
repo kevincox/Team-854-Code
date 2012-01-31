@@ -5,6 +5,9 @@ Input::Input():
 	jsDrive(constants.jsDrivePort)
 {
 	driveIsFlipped = false;
+	shootPos = false;
+	drivePos = false;
+	numOfBallsToShoot = 0;
 }
 
 Input::~Input()
@@ -46,15 +49,15 @@ void Input::update()
 	bool shootPosButton;
 
 	shootPosButton = jsDrive.GetRawButton(constants.jsDriveButtonShootPos);
-	if(shootPosButton && !shootPosButtonPressedBefore) shootPos++;
+	if(shootPosButton && !shootPosButtonPressedBefore) shootPos = true;
 	
 	shootPosButtonPressedBefore = shootPosButton;
 
-	bool pickUpPosButton;
+	bool drivePosButton;
 
-	pickUpPosButton = jsDrive.GetRawButton(constants.jsDriveButtonPickUpPos);
-	if(pickUpPosButton && !pickUpPosButtonPressedBefore)pickUp++;
-	pickUpPosButtonPressedBefore = pickUpPosButton;
+	drivePosButton = jsDrive.GetRawButton(constants.jsDriveButtonDrivePos);
+	if(drivePosButton && !drivePosButtonPressedBefore)drivePos = true;
+	drivePosButtonPressedBefore = drivePosButton;
 	
 	bool forwardsButton;
 	forwardsButton = jsDrive.GetRawButton(constants.jsDriveButtonSweeperForwards);
@@ -97,6 +100,26 @@ bool Input::getBackwardsButtonPressed()
 	if (backwardsButtonPressed)
 	{
 		backwardsButtonPressed = false;
+		return true;
+	}
+	else return false;
+}
+
+bool Input::getShootPos()
+{
+	if(shootPos)
+	{
+		shootPos = false;
+		return true;
+	}
+	else return false;
+}
+
+bool Input::getDrivePos()
+{
+	if(drivePos)
+	{
+		drivePos = false;
 		return true;
 	}
 	else return false;

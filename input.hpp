@@ -14,16 +14,16 @@ private:
 	bool bFlipState;
 	bool shootButtonPressedBefore;
 	bool shootPosButtonPressedBefore;
-	bool pickUpPosButtonPressedBefore;
+	bool drivePosButtonPressedBefore;
 	bool forwardsButtonPressedBefore;
 	bool backwardsButtonPressedBefore;
 	bool driveIsFlipped;
 	bool forwardsButtonPressed;
 	bool backwardsButtonPressed;
+	bool shootPos;
+	bool drivePos;
 
 	int numOfBallsToShoot;
-	int shootPos;
-	int pickUp;
 
 public:
 	Input();
@@ -36,6 +36,8 @@ public:
 	int getNumOfBallsToShoot();
 	bool getForwardsButtonPressed();
 	bool getBackwardsButtonPressed();
+	bool getShootPos();
+	bool getDrivePos();
 };
 
 #endif

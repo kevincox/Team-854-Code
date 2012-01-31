@@ -33,7 +33,7 @@ private:
 	
 	void init(void);
 	void newBall(void);
-	void rotateBalls(void);
+	Elevator *doShoot(void);
 
 public:
 	Elevator(SpeedController *top, SpeedController *bottom,
@@ -55,7 +55,7 @@ public:
 	bool isFull(void);
 
 	ElevatorPosition getPosition(void);
-	Elevator *setPosition(ElevatorPosition pos);
+	Elevator *setPosition(bool shootPos, bool drivePos);
 	Elevator *calculateBalls();
 	int getNumOfBalls(); 
 
