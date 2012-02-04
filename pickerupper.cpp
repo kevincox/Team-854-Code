@@ -10,10 +10,11 @@ PickerUpper::~PickerUpper()
 {
 }
 
-PickerUpper *PickerUpper::reverseDirection(bool forwards, bool backwards)
+PickerUpper *PickerUpper::reverseDirection(bool forwards)
 {
-	if(!(forwards&&backwards)&& forwards)this->goForwards();
-	else if(!(forwards&&backwards)&& backwards)this->goBackwards();
+	if (forwards) 		this->goForwards();
+	else if (!forwards) this->goBackwards();
+	else cerr << "IDK WHATS GOING ON WITH PICKERUPPER!!!" << endl;
 	update();
 	return this;
 }
@@ -38,14 +39,14 @@ double PickerUpper::getSpeed()
 PickerUpper *PickerUpper::goForwards()
 {
 	if(speed < 0)speed *= -1;
-	if(speed == 0)speed = constants.PickerUpperForwardsSpeed;
+	if(speed == 0)speed = Constants::PickerUpperForwardsSpeed;
 	return this;
 }
 
 PickerUpper *PickerUpper::goBackwards()
 {
 	if(speed > 0)speed *= -1;
-	if(speed == 0)speed = constants.PickerUpperBackwardsSpeed;
+	if(speed == 0)speed = Constants::PickerUpperBackwardsSpeed;
 	return this;
 }
 

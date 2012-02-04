@@ -2,11 +2,10 @@
 #include "constants.hpp"
 
 Input::Input():
-	jsDrive(constants.jsDrivePort)
+	jsDrive(Constants::jsDrivePort)
 {
 	driveIsFlipped = false;
-	shootPos = false;
-	drivePos = false;
+	pos = Elevator::drivePos;
 	numOfBallsToShoot = 0;
 }
 
@@ -25,49 +24,39 @@ Vector Input::driveDirection()
 void Input::update()
 {
 	driveDir = Vector(Vector::xy,
-	                   jsDrive.GetX()/constants.jsDriveMaxX,
-	                   jsDrive.GetY()/constants.jsDriveMaxY*(-1)
+	                   jsDrive.GetX()/Constants::jsDriveMaxX,
+	                   jsDrive.GetY()/Constants::jsDriveMaxY*(-1)
 	                 );
 
-	if ( driveDir.x < constants.jsDriveDeadbandXMax &&
-		 driveDir.x > constants.jsDriveDeadbandXMin ) driveDir.x = 0;
-	if ( driveDir.y < constants.jsDriveDeadbandYMax &&
-		 driveDir.y > constants.jsDriveDeadbandYMin ) driveDir.y = 0;
+	if ( driveDir.x < Constants::jsDriveDeadbandXMax &&
+		 driveDir.x > Constants::jsDriveDeadbandXMin ) driveDir.x = 0;
+	if ( driveDir.y < Constants::jsDriveDeadbandYMax &&
+		 driveDir.y > Constants::jsDriveDeadbandYMin ) driveDir.y = 0;
 
 	bool s;
 
-	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonReverse);
 	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
 
-	bool shootButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
+	if (s) pos = Elevator::shooting;
 
-	shootButton = jsDrive.GetRawButton(constants.jsDriveButtonShoot);
-	if (shootButton && !shootButtonPressedBefore) numOfBallsToShoot++;
-	shootButtonPressedBefore = shootButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonShootPos);
+	if (s && !shootPosButtonPressedBefore) pos = Elevator::shootPos;
+	shootPosButtonPressedBefore = s;
 
-	bool shootPosButton;
-
-	shootPosButton = jsDrive.GetRawButton(constants.jsDriveButtonShootPos);
-	if(shootPosButton && !shootPosButtonPressedBefore) shootPos = true;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonDrivePos);
+	if (s && !drivePosButtonPressedBefore) pos = Elevator::drivePos;
+	drivePosButtonPressedBefore = s;
 	
-	shootPosButtonPressedBefore = shootPosButton;
-
-	bool drivePosButton;
-
-	drivePosButton = jsDrive.GetRawButton(constants.jsDriveButtonDrivePos);
-	if(drivePosButton && !drivePosButtonPressedBefore)drivePos = true;
-	drivePosButtonPressedBefore = drivePosButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperForwards);
+	if(s && !forwardsButtonPressedBefore)sweeperIsForwards = true;
+	forwardsButtonPressedBefore = s;
 	
-	bool forwardsButton;
-	forwardsButton = jsDrive.GetRawButton(constants.jsDriveButtonSweeperForwards);
-	if(forwardsButton && !forwardsButtonPressedBefore)forwardsButtonPressed = true;
-	forwardsButtonPressedBefore = forwardsButton;
-	
-	bool backwardsButton;
-	backwardsButton = jsDrive.GetRawButton(constants.jsDriveButtonSweeperBackwards);
-	if(backwardsButton && !backwardsButtonPressedBefore)backwardsButtonPressed = true;
-	backwardsButtonPressedBefore = backwardsButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperBackwards);
+	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
+	backwardsButtonPressedBefore = s;
 }
 
 /*int Input::ballsToShoot()
@@ -82,45 +71,17 @@ bool Input::driveFlipped()
 
 int Input::getNumOfBallsToShoot ()
 {
-	return numOfBallsToShoot;
+	int b =  numOfBallsToShoot;
+	numOfBallsToShoot = 0;
+	return b;
 }
 
-bool Input::getForwardsButtonPressed()
+bool Input::getSweeperIsForwards()
 {
-	if (forwardsButtonPressed)
-	{
-		forwardsButtonPressed = false;
-		return true;
-	}
-	else return false;
+	return sweeperIsForwards;
 }
 
-bool Input::getBackwardsButtonPressed()
+Elevator::ElevatorPosition Input::getPos()
 {
-	if (backwardsButtonPressed)
-	{
-		backwardsButtonPressed = false;
-		return true;
-	}
-	else return false;
-}
-
-bool Input::getShootPos()
-{
-	if(shootPos)
-	{
-		shootPos = false;
-		return true;
-	}
-	else return false;
-}
-
-bool Input::getDrivePos()
-{
-	if(drivePos)
-	{
-		drivePos = false;
-		return true;
-	}
-	else return false;
+	return pos;
 }

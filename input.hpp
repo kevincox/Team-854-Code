@@ -3,6 +3,7 @@
 
 #include "WPILib.h"
 #include "vectorLib/vector.hpp"
+#include "Elevator.hpp"
 
 class Input
 {
@@ -10,6 +11,8 @@ private:
 	Joystick jsDrive;
 
 	Vector driveDir;
+	
+	Elevator::ElevatorPosition pos;
 
 	bool bFlipState;
 	bool shootButtonPressedBefore;
@@ -18,8 +21,7 @@ private:
 	bool forwardsButtonPressedBefore;
 	bool backwardsButtonPressedBefore;
 	bool driveIsFlipped;
-	bool forwardsButtonPressed;
-	bool backwardsButtonPressed;
+	bool sweeperIsForwards;
 	bool shootPos;
 	bool drivePos;
 
@@ -34,10 +36,8 @@ public:
 	int getShoot();
 	bool driveFlipped();
 	int getNumOfBallsToShoot();
-	bool getForwardsButtonPressed();
-	bool getBackwardsButtonPressed();
-	bool getShootPos();
-	bool getDrivePos();
+	bool getSweeperIsForwards();
+	Elevator::ElevatorPosition getPos();
 };
 
 #endif

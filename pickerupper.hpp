@@ -16,7 +16,7 @@ public:
 	~PickerUpper();
 
 	void spin();
-	PickerUpper * reverseDirection(bool forwards, bool backwards);
+	PickerUpper * reverseDirection(bool forwards);
 	PickerUpper * update();
 	void setSpeed(double speed);
 	double getSpeed();

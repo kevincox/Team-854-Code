@@ -1,4 +1,5 @@
 #include "elevator.hpp"
+#include "constants.hpp"
 
 Elevator::Elevator(SpeedController *top, SpeedController *bottom,
                     Encoder *eTop, Encoder *eBottom,
@@ -22,26 +23,22 @@ Elevator *Elevator::calculate()
 	this->calculateBalls();
 	if (!ball1)
 	{
-		ballsToShoot = 0;
 		speed = 0;
 	}
-	else if (ballsToShoot > 0)
+	else if (pos == drivePos)
 	{
-		speed = 1;
-		doShoot();
+		if (iIn->Get() == 1) speed = 0;
+		else speed = -1;
 	}
-	else if (ballsToShoot == 0)
+	else if (pos == shootPos)
 	{
-		if (pos == drivePos)
-		{
-			if (iIn->Get() == 1) speed = 0;
-			else speed = -1;
-		}
-		else if (pos == shootPos)
-		{
-			if (iTop->Get() == 1) speed = 0;
-			else speed = 1;
-		}
+		if (iTop->Get() == 1) speed = 0;
+		else speed = 1;
+	}
+	else if(pos == shooting)
+	{
+		if(getNumOfBalls() > 0)speed = 1;
+		else speed = 0;
 	}
 	else cerr << "[Elevator::calculate()] This should not be printed." << endl;
 	return this;
@@ -54,14 +51,13 @@ Elevator *Elevator::update()
 	return this;
 }
 
-void Elevator::init()
+void Elevator::init(void)
 {
 	top = bottom = NULL;
 	eTop = eBottom = NULL;
 	iTop = iIn = iEnter = NULL;
 
 	ball1 = ball2 = ball3 = NULL;
-	ballsToShoot = 0;
 }
 
 void Elevator::newBall (void)
@@ -104,19 +100,6 @@ bool Elevator::isFull(void)
 	return ball3 != NULL;
 }
 
-Elevator* Elevator::shoot(int numBalls)
-{
-	if((ballsToShoot + numBalls) <= 3) 
-		ballsToShoot += numBalls;
-	if(ballsToShoot == 3 && !ball3)
-		ballsToShoot --;
-	if(ballsToShoot == 2 && !ball2)
-		ballsToShoot--;
-	if(ballsToShoot == 1 && !ball1)
-		ballsToShoot--;
-	return this;
-}
-
 Elevator* Elevator::shootPosition()
 {
 	pos = shootPos;
@@ -131,7 +114,7 @@ Elevator* Elevator::pickUpPosition()
 
 void Elevator::testSensor()
 {
-	fprintf(stderr, "%d", iEnter->Get());
+	fprintf(stderr, "%d", iTop->Get());
 }
 
 Elevator::ElevatorPosition Elevator::getPosition()
@@ -139,29 +122,40 @@ Elevator::ElevatorPosition Elevator::getPosition()
 	return pos;
 }
 
-Elevator *Elevator::setPosition(bool shootPos, bool drivePos)
+Elevator *Elevator::setPosition(ElevatorPosition pos)
 {
-	if(shootPos && !drivePos) pos = shootPos;
-	else if(!shootPos && drivePos) pos = drivePos;
+	this->pos = pos;
 	return this;
 }
 
 Elevator *Elevator::calculateBalls()
 {
-	UINT32 iEnterOn = iEnter->Get();
+	bool iEnterOn = iEnter->Get();
+	bool iTopOn = iTop->Get();
 	
 	if (iEnterOn && !iEnterOnBefore)
 	{
 		this->newBall();
 	}
 	iEnterOnBefore = iEnterOn;
-	
+	cerr << "\t Time is: " << tITop.Get() << "\n";
+	if( iTopOn && !tITop.Get() == 0 )
+	{
+		tITop.Start();
+	}
+	else if( !iTopOn && tITop.Get() > Constants::elevatorBallSpeed )
+	{
+		if ( speed > 0 ) doShoot();
+		
+		tITop.Stop();
+		tITop.Reset();
+	}
 	return this;
 }
 
 int Elevator::getNumOfBalls()
 {
-	if (ball3 != NULL) return 3;
+	if      (ball3 != NULL) return 3;
 	else if (ball2 != NULL) return 2;
 	else if (ball1 != NULL) return 1;
 	else return 0;

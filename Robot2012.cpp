@@ -18,11 +18,11 @@ void Robot2012::RobotInit ()
 	inputs = new Input();
 
 	cerr << "Loading Motor Controllers" << endl;
-	ml = new Victor(constants.motorLSlot, constants.motorLChannel);
-	mr = new Victor(constants.motorRSlot, constants.motorRChannel);
-	eb = new Victor(constants.bottomElevatorMotorSlot, constants.bottomElevatorMotorChannel);
-	et = new Victor(constants.topElevatorMotorSlot, constants.topElevatorMotorChannel);
-	b = new Victor(constants.brushMotorSlot, constants.brushMotorChannel);
+	ml = new Victor(Constants::motorLSlot, Constants::motorLChannel);
+	mr = new Victor(Constants::motorRSlot, Constants::motorRChannel);
+	eb = new Victor(Constants::bottomElevatorMotorSlot, Constants::bottomElevatorMotorChannel);
+	et = new Victor(Constants::topElevatorMotorSlot, Constants::topElevatorMotorChannel);
+	b = new Victor(Constants::brushMotorSlot, Constants::brushMotorChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -31,12 +31,12 @@ void Robot2012::RobotInit ()
 	output = new DSOutput(this);
 
 	cerr << "Loading Elevator" << endl;
-	elevatorSensorTop = new DigitalInput(constants.sensorElevatorTopSlot,
-	                                      constants.sensorElevatorTopChannel);
-	elevatorSensorIn = new DigitalInput(constants.sensorElevatorInSlot,
-											constants.sensorElevatorInChannel);
-	elevatorSensorEnter = new DigitalInput(constants.sensorElevatorEnterSlot,
-												constants.sensorElevatorEnterChannel);
+	elevatorSensorTop = new DigitalInput(Constants::sensorElevatorTopSlot,
+	                                     Constants::sensorElevatorTopChannel);
+	elevatorSensorIn = new DigitalInput(Constants::sensorElevatorInSlot,
+										Constants::sensorElevatorInChannel);
+	elevatorSensorEnter = new DigitalInput(Constants::sensorElevatorEnterSlot,
+	                                       Constants::sensorElevatorEnterChannel);
 	elevator = new Elevator(et, eb,
 							NULL, NULL,
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
@@ -55,7 +55,13 @@ void Robot2012::DisabledPeriodic (void)
 
 void Robot2012::DisabledContinuous(void)
 {
-
+	for(int x = 1; x < 13; x++)
+	{
+		DigitalInput *sensor = new DigitalInput(1, x);
+		cerr << x <<":"<< sensor->Get() << " ";
+		delete sensor;
+	}
+	cerr << endl;
 }
 
 void Robot2012::AutonomousPeriodic (void)
@@ -79,10 +85,9 @@ void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
 	
-	elevator->shoot(inputs->getNumOfBallsToShoot());
-	elevator->setPosition(inputs->getShootPos(), inputs->getDrivePos());
+	elevator->setPosition(inputs->getPos());
 
-	brush->reverseDirection(inputs->getForwardsButtonPressed(), inputs->getBackwardsButtonPressed());
+	brush->reverseDirection(inputs->getSweeperIsForwards());
 
 	drive->setFlip(inputs->driveFlipped());
 	drive->setVelocity(inputs->driveDirection());

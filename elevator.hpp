@@ -7,6 +7,7 @@
 
 #include "ball.hpp"
 #include <DigitalInput.h>
+#include <Timer.h>
 
 class Elevator
 {
@@ -15,6 +16,7 @@ public:
 	
 	const static ElevatorPosition drivePos = 1;
 	const static ElevatorPosition shootPos = 2;
+	const static ElevatorPosition shooting = 3;
 
 private:
 	ElevatorPosition pos;
@@ -24,12 +26,12 @@ private:
 	SpeedController *top, *bottom;
 	Encoder *eTop, *eBottom;
 	DigitalInput *iTop, *iIn, *iEnter;
+	
+	Timer tITop, tIIn, tIEnter;
 
 	double speed;
 
-	int ballsToShoot;
-
-	UINT32 iEnterOnBefore;
+	bool iEnterOnBefore;
 	
 	void init(void);
 	void newBall(void);
@@ -45,7 +47,6 @@ public:
 	Elevator *calculate (void);
 	Elevator *update(void);
 
-	Elevator* shoot(int numBalls);
 	Elevator* shootPosition();
 	Elevator* pickUpPosition();
 	Elevator* stopMoving();
@@ -55,7 +56,7 @@ public:
 	bool isFull(void);
 
 	ElevatorPosition getPosition(void);
-	Elevator *setPosition(bool shootPos, bool drivePos);
+	Elevator *setPosition(ElevatorPosition pos);
 	Elevator *calculateBalls();
 	int getNumOfBalls(); 
 
