@@ -48,6 +48,7 @@ Elevator *Elevator::calculate()
 
 Elevator *Elevator::update()
 {
+	if (iEnter) pickUpBall;
 	Elevator->calculate();
 
 	return this;
@@ -60,6 +61,30 @@ void Elevator::init()
 	iTop = iIn = iEnter = NULL;
 
 	ball1 = ball2 = ball3 = NULL;
+}
+
+bool Elevator::pickUpBall()
+{
+	if (!isFull())
+	{
+		PickerUpper->reverseDirection();
+		return false;
+	}
+	else
+	{
+		switch (pos)
+		{
+			case drivePos:
+				newBall(); //should probably use iIn but couldn't find newBall() called anywhere
+				//move elevator forward somehow with encoders?
+				return true;
+				break;
+			case shootPos:
+				pickUpPosition();
+				return false;
+				break;
+		}
+	}
 }
 
 void Elevator::newBall (void)

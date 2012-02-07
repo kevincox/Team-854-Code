@@ -46,6 +46,7 @@ public:
 	Elevator* shootPosition();
 	Elevator* pickUpPosition();
 	Elevator* stopMoving();
+	bool pickUpBall();
 
 	void testSensor ();
 	
