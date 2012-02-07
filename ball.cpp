@@ -15,8 +15,8 @@ Ball::Ball(double pos)
 void Ball::init(void)
 {
 	pos = 0;
-	diameter = constants.ballDiameter;
-	radius = constants.ballDiameter/2;
+	diameter = Constants::ballDiameter;
+	radius = Constants::ballDiameter/2;
 }
 
 Ball *Ball::setPos(double pos)
