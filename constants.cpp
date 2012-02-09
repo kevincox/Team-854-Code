@@ -22,6 +22,7 @@ namespace Constants
 
 	const double bottomElevatorMotorCorrection = 1;
 	const double topElevatorMotorCorrection = 1;
+	const double motorBrushCorrection = -1;
 
 	const UINT32 accel1Slot = 1;
 	const UINT32 accel1Channel = 3;
@@ -46,7 +47,7 @@ namespace Constants
 	const UINT32 jsDriveButtonSweeperBackwards = 10;
 
 	const double jsDriveDeadbandXMax = 0.05;
-	extern double jsDriveDeadbandXMin = -0.05;
+	const double jsDriveDeadbandXMin = -0.05;
 	const double jsDriveDeadbandYMax = 0.05;
 	const double jsDriveDeadbandYMin = -0.05;
 

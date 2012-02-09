@@ -20,7 +20,7 @@ PickerUpper *PickerUpper::setDirection(bool forwards)
 
 PickerUpper *PickerUpper::update()
 {
-	motor->Set(speed);
+	motor->Set(speed*Constants::motorBrushCorrection);
 	
 	return this;
 }

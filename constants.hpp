@@ -21,6 +21,7 @@ namespace Constants
 	extern const double motorRCorrection;
 	extern const double bottomElevatorMotorCorrection;
 	extern const double topElevatorMotorCorrection;
+	extern const double motorBrushCorrection;
 
 	extern const UINT32 accel1Slot;
 	extern const UINT32 accel1Channel;
@@ -36,7 +37,6 @@ namespace Constants
 	extern const UINT32 sensorElevatorInChannel;
 	extern const UINT32 sensorElevatorEnterSlot;
 	extern const UINT32 sensorElevatorEnterChannel;
-
 
 	extern const UINT32 jsDriveButtonReverse;
 	extern const UINT32 jsDriveButtonShoot;
