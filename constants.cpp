@@ -6,15 +6,16 @@ namespace Constants
 	const UINT32 motorLChannel = 1;
 	const UINT32 motorRSlot = 1;
 	const UINT32 motorRChannel = 2;
-	const UINT32 bottomElevatorMotorSlot = 1;
-	const UINT32 bottomElevatorMotorChannel = 3;
-	const UINT32 topElevatorMotorSlot = 1;
-	const UINT32 topElevatorMotorChannel = 4;
-	const UINT32 brushMotorSlot = 1;
-	const UINT32 brushMotorChannel = 5;
+	const UINT32 motorElevatorBSlot = 1;
+	const UINT32 motorElevatorBChannel = 3;
+	const UINT32 motorElevatorTSlot = 1;
+	const UINT32 motorElevatorTChannel = 4;
+	const UINT32 motorBrushSlot = 1;
+	const UINT32 motorBrushChannel = 5;
 
 	const double motorLCorrection = -1;
 	const double motorRCorrection = 1;
+
 	const double bottomElevatorMotorCorrection = 1;
 	const double topElevatorMotorCorrection = 1;
 

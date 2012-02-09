@@ -10,12 +10,12 @@ namespace Constants
 	extern const UINT32 motorLChannel;
 	extern const UINT32 motorRSlot;
 	extern const UINT32 motorRChannel;
-	extern const UINT32 bottomElevatorMotorSlot;
-	extern const UINT32 bottomElevatorMotorChannel;
-	extern const UINT32 topElevatorMotorSlot;
-	extern const UINT32 topElevatorMotorChannel;
-	extern const UINT32 brushMotorSlot;
-	extern const UINT32 brushMotorChannel;
+	extern const UINT32 motorElevatorBSlot;
+	extern const UINT32 motorElevatorBChannel;
+	extern const UINT32 motorElevatorTSlot;
+	extern const UINT32 motorElevatorTChannel;
+	extern const UINT32 motorBrushSlot;
+	extern const UINT32 motorBrushChannel;
 
 	extern const double motorLCorrection;
 	extern const double motorRCorrection;
