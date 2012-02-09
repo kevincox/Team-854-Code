@@ -42,9 +42,6 @@ void Input::update()
 	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
 
-	s = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
-	if (s)  pos = Elevator::shooting;
-
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonShootPos);
 	if (s && !shootPosButtonPressedBefore) pos = Elevator::shootPos;
 	shootPosButtonPressedBefore = s;
@@ -53,6 +50,8 @@ void Input::update()
 	if (s && !drivePosButtonPressedBefore) pos = Elevator::drivePos;
 	drivePosButtonPressedBefore = s;
 	
+	shooting = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
+	
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperForwards);
 	if(s && !forwardsButtonPressedBefore)sweeperIsForwards = true;
 	forwardsButtonPressedBefore = s;
@@ -60,8 +59,6 @@ void Input::update()
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperBackwards);
 	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
 	backwardsButtonPressedBefore = s;
-	
-	shooting = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
 }
 
 /*int Input::ballsToShoot()
