@@ -10,12 +10,11 @@ PickerUpper::~PickerUpper()
 {
 }
 
-PickerUpper *PickerUpper::reverseDirection(bool forwards)
+PickerUpper *PickerUpper::setDirection(bool forwards)
 {
-	if (forwards) 		this->goForwards();
-	else if (!forwards) this->goBackwards();
-	else cerr << "IDK WHATS GOING ON WITH PICKERUPPER!!!" << endl;
-	update();
+	if (forwards) this->goForwards();
+	else          this->goBackwards();
+	
 	return this;
 }
 
