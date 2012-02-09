@@ -12,6 +12,7 @@ private:
 
 	Vector driveDir;
 	
+	bool shooting;
 	Elevator::ElevatorPosition pos;
 
 	bool bFlipState;
@@ -22,8 +23,6 @@ private:
 	bool backwardsButtonPressedBefore;
 	bool driveIsFlipped;
 	bool sweeperIsForwards;
-	bool shootPos;
-	bool drivePos;
 
 	int numOfBallsToShoot;
 

@@ -5,7 +5,10 @@ Input::Input():
 	jsDrive(Constants::jsDrivePort)
 {
 	driveIsFlipped = false;
+	
 	pos = Elevator::drivePos;
+	shooting = false;
+	
 	numOfBallsToShoot = 0;
 }
 
@@ -58,11 +61,7 @@ void Input::update()
 	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
 	backwardsButtonPressedBefore = s;
 	
-	if(jsDrive.GetRawButton(Constants::jsDriveButtonShoot) == 0 &&
-			pos == Elevator::shooting )
-	{
-		pos = Elevator::drivePos;
-	}
+	shooting = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
 }
 
 /*int Input::ballsToShoot()
@@ -89,5 +88,6 @@ bool Input::getSweeperIsForwards()
 
 Elevator::ElevatorPosition Input::getPos()
 {
+	if (shooting) return Elevator::shooting;
 	return pos;
 }
