@@ -52,8 +52,6 @@ public:
 	Elevator* stopMoving();
 	bool pickUpBall();
 
-	void testSensor ();
-	
 	bool isFull(void);
 
 	ElevatorPosition getPosition(void);

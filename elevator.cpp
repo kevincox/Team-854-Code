@@ -46,8 +46,6 @@ Elevator *Elevator::calculate()
 
 Elevator *Elevator::update()
 {
-	Elevator->calculate();
-
 	top->Set(speed);
 	bottom->Set(speed);
 
@@ -65,16 +63,9 @@ void Elevator::init(void)
 
 void Elevator::newBall (void)
 {
-	if      (!ball1) fprintf(stderr, "BALL 1\n");
-	else if (!ball2) fprintf(stderr, "BALL 2\n");
-	else if (!ball3) fprintf(stderr, "BALL 3\n");
 	ball3 = ball2;
 	ball2 = ball1;
 	ball1 = new Ball(0);
-	if      (!ball1) fprintf(stderr, "BALL 1\n\n");
-	else if (!ball2) fprintf(stderr, "BALL 2\n\n");
-	else if (!ball3) fprintf(stderr, "BALL 3\n\n");
-	else cerr << "Too many balls." << endl;
 }
 
 Elevator *Elevator::doShoot ( void )
@@ -115,11 +106,6 @@ Elevator* Elevator::pickUpPosition()
 	return this;
 }
 
-void Elevator::testSensor()
-{
-	fprintf(stderr, "%d", iTop->Get());
-}
-
 Elevator::ElevatorPosition Elevator::getPosition()
 {
 	return pos;
@@ -136,48 +122,50 @@ Elevator *Elevator::calculateBalls()
 	bool iEnterOn = iEnter->Get();
 	bool iTopOn = iTop->Get();
 	
+	//cerr << "Time: " << tITop.Get() << endl;
+	
 	if (iEnterOn && !iEnterOnBefore)
 	{
 		this->pickUpBall();
 	}
+	
 	iEnterOnBefore = iEnterOn;
-	cerr << "\t Time is: " << tITop.Get() << "\n";
-	if( iTopOn && !tITop.Get() == 0 )
+	if( iTopOn && tITop.Get() == 0) // Ball was not previously in sensor.
 	{
 		tITop.Start();
 	}
-	else if( !iTopOn && tITop.Get() > Constants::elevatorBallSpeed )
-	{
-		if ( speed > 0 ) doShoot();
+	else if( !iTopOn && tITop.Get() > Constants::elevatorBallSpeed ) 
+	{ // Ball went through sensor.
 		
-		tITop.Stop();
-		tITop.Reset();
+		if ( speed > 0 )
+		{
+			doShoot();
+			//cerr << "SHOT!" << endl;
+		}
+	}
+	
+	if (!iTopOn)       // If the sensor is off,
+	{
+		tITop.Stop();  // Reset the timer.
+		tITop.Reset(); //
 	}
 	return this;
 }
 
 bool Elevator::pickUpBall()
 {
-	if (!isFull())
-	{
-		PickerUpper->reverseDirection();
+	this->newBall();
+	if (pos == shooting || isFull()) //do nothing, keep shooting
 		return false;
-	}
+	else if (iIn->Get())
+		//find a way to pick up the ball
+		return true;
 	else
 	{
-		switch (pos)
-		{
-			case drivePos:
-				this->newBall();
-				//move elevator forward somehow with encoders?
-				return true;
-				break;
-			case shootPos:
-				pickUpPosition();
-				return false;
-				break;
-		}
+		speed = -1;
+		return false;
 	}
+
 }
 
 int Elevator::getNumOfBalls()

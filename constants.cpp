@@ -4,8 +4,8 @@ namespace Constants
 {
 	const UINT32 motorLSlot = 1;
 	const UINT32 motorLChannel = 1;
-	const UINT32 motorRSlot = 2;
-	const UINT32 motorRChannel = 1;
+	const UINT32 motorRSlot = 1;
+	const UINT32 motorRChannel = 2;
 	const UINT32 bottomElevatorMotorSlot = 1;
 	const UINT32 bottomElevatorMotorChannel = 3;
 	const UINT32 topElevatorMotorSlot = 1;

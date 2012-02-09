@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+#define TEST_BOARD
+
 #include "Robot2012.hpp"
 
 Robot2012::Robot2012(void)
@@ -18,11 +20,17 @@ void Robot2012::RobotInit ()
 	inputs = new Input();
 
 	cerr << "Loading Motor Controllers" << endl;
-	ml = new Victor(Constants::motorLSlot, Constants::motorLChannel);
-	mr = new Victor(Constants::motorRSlot, Constants::motorRChannel);
-	eb = new Victor(Constants::bottomElevatorMotorSlot, Constants::bottomElevatorMotorChannel);
-	et = new Victor(Constants::topElevatorMotorSlot, Constants::topElevatorMotorChannel);
-	b = new Victor(Constants::brushMotorSlot, Constants::brushMotorChannel);
+
+#ifdef TEST_BOARD
+	#define SpeedControllerType Jaguar
+#else
+	#define SpeedControllerType Victor
+#endif
+	ml = new SpeedControllerType(Constants::motorLSlot, Constants::motorLChannel);
+	mr = new SpeedControllerType(Constants::motorRSlot, Constants::motorRChannel);
+	eb = new SpeedControllerType(Constants::bottomElevatorMotorSlot, Constants::bottomElevatorMotorChannel);
+	et = new SpeedControllerType(Constants::topElevatorMotorSlot, Constants::topElevatorMotorChannel);
+	 b = new SpeedControllerType(Constants::brushMotorSlot, Constants::brushMotorChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -50,11 +58,8 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
-	brush->setSpeed(0);
-}
-
-void Robot2012::DisabledContinuous(void)
-{
+	
+	/*
 	for(int x = 1; x < 13; x++)
 	{
 		DigitalInput *sensor = new DigitalInput(1, x);
@@ -62,6 +67,11 @@ void Robot2012::DisabledContinuous(void)
 		delete sensor;
 	}
 	cerr << endl;
+	//*/
+}
+
+void Robot2012::DisabledContinuous(void)
+{
 }
 
 void Robot2012::AutonomousPeriodic (void)
@@ -77,7 +87,6 @@ void Robot2012::AutonomousContinuous(void)
 void Robot2012::TeleopPeriodic (void)
 {
 	output->update();
-	elevator->testSensor();
 	//cerr << sensors->getAccelVal(1) << endl;
 }
 

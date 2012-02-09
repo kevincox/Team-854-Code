@@ -40,7 +40,7 @@ void Input::update()
 	bFlipState = s;
 
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
-	if (s) pos = Elevator::shooting;
+	if (s)  pos = Elevator::shooting;
 
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonShootPos);
 	if (s && !shootPosButtonPressedBefore) pos = Elevator::shootPos;
@@ -57,6 +57,12 @@ void Input::update()
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperBackwards);
 	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
 	backwardsButtonPressedBefore = s;
+	
+	if(jsDrive.GetRawButton(Constants::jsDriveButtonShoot) == 0 &&
+			pos == Elevator::shooting )
+	{
+		pos = Elevator::drivePos;
+	}
 }
 
 /*int Input::ballsToShoot()

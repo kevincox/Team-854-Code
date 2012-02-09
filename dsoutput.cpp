@@ -44,6 +44,7 @@ void DSOutput::update()
 			break;
 		case Elevator::shooting:
 			out->PrintfLine(l5, "E position is shooting.");
+			break;
 		default:
 			out->PrintfLine(l5, "uh oh");
 			break;
