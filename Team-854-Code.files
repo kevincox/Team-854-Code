@@ -33,5 +33,10 @@ dsoutput.cpp
 drive.cpp
 constants.cpp
 ball.cpp
-pickerupper.h
+pickerupper.cpp
+Robot2012.hpp
+pickerupper.hpp
+input.hpp
+sensor.cpp
+Robot2012.cpp
 pickerupper.cpp
