@@ -9,9 +9,13 @@ namespace Constants
 	const UINT32 motorElevatorBSlot = 1;
 	const UINT32 motorElevatorBChannel = 3;
 	const UINT32 motorElevatorTSlot = 1;
-	const UINT32 motorElevatorTChannel = 4;
+	const UINT32 motorElevatorTChannel = 3;
+	const UINT32 motorShooterBSlot = 1;
+	const UINT32 motorShooterBChannel = 5;
+	const UINT32 motorShooterTSlot = 1;
+	const UINT32 motorShooterTChannel = 6;
 	const UINT32 motorBrushSlot = 1;
-	const UINT32 motorBrushChannel = 5;
+	const UINT32 motorBrushChannel = 4;
 
 	const double motorLCorrection = -1;
 	const double motorRCorrection = 1;

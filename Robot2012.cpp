@@ -96,13 +96,14 @@ void Robot2012::TeleopContinuous (void)
 
 	elevator->setPosition(inputs->getPos());
 
-	brush->reverseDirection(inputs->getSweeperIsForwards());
-
 	drive->setFlip(inputs->driveFlipped());
 	drive->setVelocity(inputs->driveDirection());
 
 	elevator->calculate();
 	drive->calculate();
+	
+	bool dir = inputs->getSweeperIsForwards() && !elevator->isFull();
+	brush->reverseDirection(dir);
 
 	drive->update();
 	elevator->update();
