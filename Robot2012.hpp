@@ -15,12 +15,13 @@ class Robot2012;
 #include "dsoutput.hpp"
 #include "elevator.hpp"
 #include "pickerupper.hpp"
+#include "shooter.hpp"
 
 class Robot2012 : public IterativeRobot
 {
 public:
 	Drive *drive;
-	SpeedController *ml, *mr, *eb, *et, *b;
+	SpeedController *ml, *mr, *eb, *et, *b, *sb, *st;
 
 	Input *inputs;
 	Sensor *sensors;
@@ -33,6 +34,8 @@ public:
 	PickerUpper *brush;
 
 	DSOutput *output;
+	
+	Shooter *shooter;
 
 	Robot2012(void);
 	void RobotInit ();

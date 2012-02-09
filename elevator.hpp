@@ -33,6 +33,8 @@ private:
 
 	bool iEnterOnBefore;
 	
+	bool limboBall;
+	
 	void init(void);
 	void newBall(void);
 	Elevator *doShoot(void);
@@ -50,8 +52,10 @@ public:
 	Elevator* shootPosition();
 	Elevator* pickUpPosition();
 	Elevator* stopMoving();
+	
 	bool pickUpBall();
-
+	Elevator* moveBallUp();
+	
 	bool isFull(void);
 
 	ElevatorPosition getPosition(void);

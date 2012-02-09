@@ -16,6 +16,10 @@ namespace Constants
 	extern const UINT32 motorElevatorTChannel;
 	extern const UINT32 motorBrushSlot;
 	extern const UINT32 motorBrushChannel;
+	extern const UINT32 motorShooterBSlot;
+	extern const UINT32 motorShooterBChannel;
+	extern const UINT32 motorShooterTSlot;
+	extern const UINT32 motorShooterTChannel;
 
 	extern const double motorLCorrection;
 	extern const double motorRCorrection;
@@ -46,7 +50,7 @@ namespace Constants
 	extern const UINT32 jsDriveButtonSweeperBackwards;
 
 	extern const double jsDriveDeadbandXMax;
-	extern  double jsDriveDeadbandXMin;
+	extern const double jsDriveDeadbandXMin;
 	extern const double jsDriveDeadbandYMax;
 	extern const double jsDriveDeadbandYMin;
 
@@ -56,7 +60,8 @@ namespace Constants
 	extern const double PickerUpperForwardsSpeed;
 	extern const double PickerUpperBackwardsSpeed;
 	
-	extern const double ballPassingBySensorTime;
+	extern const double shooterTopMotorSpeed;
+	extern const double shooterBottomMotorSpeed;
 }
 
 #endif

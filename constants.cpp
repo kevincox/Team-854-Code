@@ -16,7 +16,7 @@ namespace Constants
 	const UINT32 motorShooterTChannel = 6;
 	const UINT32 motorBrushSlot = 1;
 	const UINT32 motorBrushChannel = 4;
-
+	
 	const double motorLCorrection = -1;
 	const double motorRCorrection = 1;
 
@@ -56,4 +56,7 @@ namespace Constants
 
 	const double PickerUpperForwardsSpeed = 1.0;
 	const double PickerUpperBackwardsSpeed = -1.0;
+	
+	const double shooterTopMotorSpeed = 1.0;
+	const double shooterBottomMotorSpeed = 1.0;
 }

@@ -31,6 +31,9 @@ void Robot2012::RobotInit ()
 	eb = new SpeedControllerType(Constants::motorElevatorBSlot, Constants::motorElevatorBChannel);
 	et = new SpeedControllerType(Constants::motorElevatorTSlot, Constants::motorElevatorTChannel);
 	b  = new SpeedControllerType(Constants::motorBrushSlot,     Constants::motorBrushChannel);
+	sb = new SpeedControllerType(Constants::motorShooterBSlot,  Constants::motorShooterBChannel);
+	st = new SpeedControllerType(Constants::motorShooterTSlot,  Constants::motorShooterTChannel);
+
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -51,6 +54,9 @@ void Robot2012::RobotInit ()
 	cerr << "Loading Picker Upper" << endl;
 	
 	brush = new PickerUpper(b);
+	
+	cerr << "Loading Shooter" << endl;
+	shooter = new Shooter(sb, st);
 
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;

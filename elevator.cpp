@@ -21,6 +21,7 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 Elevator *Elevator::calculate()
 {	
 	this->calculateBalls();
+	
 	if (!ball1)
 	{
 		speed = 0;
@@ -123,8 +124,9 @@ Elevator *Elevator::calculateBalls()
 	bool iTopOn = iTop->Get();
 	
 	//cerr << "Time: " << tITop.Get() << endl;
-	
-	if (iEnterOn && !iEnterOnBefore)
+	if (limboBall == true)
+		moveBallUp();
+	else if (iEnterOn && !iEnterOnBefore)
 	{
 		this->pickUpBall();
 	}
@@ -139,8 +141,8 @@ Elevator *Elevator::calculateBalls()
 		
 		if ( speed > 0 )
 		{
+			cerr << tITop.Get() << endl;
 			doShoot();
-			//cerr << "SHOT!" << endl;
 		}
 	}
 	
@@ -158,8 +160,10 @@ bool Elevator::pickUpBall()
 	if (pos == shooting || isFull()) //do nothing, keep shooting
 		return false;
 	else if (iIn->Get())
-		//find a way to pick up the ball
+	{
+		moveBallUp();
 		return true;
+	}
 	else
 	{
 		speed = -1;
@@ -168,6 +172,18 @@ bool Elevator::pickUpBall()
 
 }
 
+Elevator *Elevator::moveBallUp()
+{
+	if (iEnter || iIn)
+	{
+		speed = 1;
+		limboBall = true;
+	}
+	else
+		limboBall = false;
+	
+	return this;
+}
 int Elevator::getNumOfBalls()
 {
 	if      (ball3 != NULL) return 3;
