@@ -26,11 +26,11 @@ void Robot2012::RobotInit ()
 #else
 	#define SpeedControllerType Victor
 #endif
-	ml = new SpeedControllerType(Constants::motorLSlot, Constants::motorLChannel);
-	mr = new SpeedControllerType(Constants::motorRSlot, Constants::motorRChannel);
-	eb = new SpeedControllerType(Constants::bottomElevatorMotorSlot, Constants::bottomElevatorMotorChannel);
-	et = new SpeedControllerType(Constants::topElevatorMotorSlot, Constants::topElevatorMotorChannel);
-	 b = new SpeedControllerType(Constants::brushMotorSlot, Constants::brushMotorChannel);
+	ml = new SpeedControllerType(Constants::motorLSlot,         Constants::motorLChannel);
+	mr = new SpeedControllerType(Constants::motorRSlot,         Constants::motorRChannel);
+	eb = new SpeedControllerType(Constants::motorElevatorBSlot, Constants::motorElevatorBChannel);
+	et = new SpeedControllerType(Constants::motorElevatorTSlot, Constants::motorElevatorTChannel);
+	 b = new SpeedControllerType(Constants::motorBrushSlot,     Constants::motorBrushChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -42,7 +42,7 @@ void Robot2012::RobotInit ()
 	elevatorSensorTop = new DigitalInput(Constants::sensorElevatorTopSlot,
 	                                     Constants::sensorElevatorTopChannel);
 	elevatorSensorIn = new DigitalInput(Constants::sensorElevatorInSlot,
-										Constants::sensorElevatorInChannel);
+	                                    Constants::sensorElevatorInChannel);
 	elevatorSensorEnter = new DigitalInput(Constants::sensorElevatorEnterSlot,
 	                                       Constants::sensorElevatorEnterChannel);
 	elevator = new Elevator(et, eb,
@@ -50,7 +50,7 @@ void Robot2012::RobotInit ()
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
 	cerr << "Loading Picker Upper" << endl;
 	brush = new PickerUpper(b);
-	
+
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
 }
@@ -58,7 +58,7 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
-	
+
 	/*
 	for(int x = 1; x < 13; x++)
 	{
@@ -93,14 +93,14 @@ void Robot2012::TeleopPeriodic (void)
 void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
-	
+
 	elevator->setPosition(inputs->getPos());
 
 	brush->reverseDirection(inputs->getSweeperIsForwards());
 
 	drive->setFlip(inputs->driveFlipped());
 	drive->setVelocity(inputs->driveDirection());
-	
+
 	elevator->calculate();
 	drive->calculate();
 
