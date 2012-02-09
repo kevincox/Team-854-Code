@@ -37,15 +37,15 @@ double PickerUpper::getSpeed()
 
 PickerUpper *PickerUpper::goForwards()
 {
-	if(speed < 0)speed *= -1;
-	if(speed == 0)speed = Constants::PickerUpperForwardsSpeed;
+	speed = Constants::PickerUpperForwardsSpeed;
+	
 	return this;
 }
 
 PickerUpper *PickerUpper::goBackwards()
 {
-	if(speed > 0)speed *= -1;
-	if(speed == 0)speed = Constants::PickerUpperBackwardsSpeed;
+	speed = Constants::PickerUpperBackwardsSpeed;
+	
 	return this;
 }
 
