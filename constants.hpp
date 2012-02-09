@@ -4,94 +4,59 @@
 
 #include <WPILib.h>
 
-struct Constants
+namespace Constants
 {
-	const UINT32 motorLSlot;
-	const UINT32 motorLChannel;
-	const UINT32 motorRSlot;
-	const UINT32 motorRChannel;
-	const UINT32 bottomElevatorMotorSlot;
-	const UINT32 bottomElevatorMotorChannel;
-	const UINT32 topElevatorMotorSlot;
-	const UINT32 topElevatorMotorChannel;
+	extern const UINT32 motorLSlot;
+	extern const UINT32 motorLChannel;
+	extern const UINT32 motorRSlot;
+	extern const UINT32 motorRChannel;
+	extern const UINT32 bottomElevatorMotorSlot;
+	extern const UINT32 bottomElevatorMotorChannel;
+	extern const UINT32 topElevatorMotorSlot;
+	extern const UINT32 topElevatorMotorChannel;
+	extern const UINT32 brushMotorSlot;
+	extern const UINT32 brushMotorChannel;
 
-	const double motorLCorrection;
-	const double motorRCorrection;
-	const double bottomElevatorMotorCorrection;
-	const double topElevatorMotorCorrection;
+	extern const double motorLCorrection;
+	extern const double motorRCorrection;
+	extern const double bottomElevatorMotorCorrection;
+	extern const double topElevatorMotorCorrection;
 
-	const UINT32 accel1Slot;
-	const UINT32 accel1Channel;
+	extern const UINT32 accel1Slot;
+	extern const UINT32 accel1Channel;
 
-	const UINT32 jsDrivePort;
+	extern const UINT32 jsDrivePort;
 
-	const double jsDriveMaxX;
-	const double jsDriveMaxY;
+	extern const double jsDriveMaxX;
+	extern const double jsDriveMaxY;
 
-	const UINT32 sensorElevatorTopSlot;
-	const UINT32 sensorElevatorTopChannel;
-	const UINT32 sensorElevatorInSlot;
-	const UINT32 sensorElevatorInChannel;
-	const UINT32 sensorElevatorEnterSlot;
-	const UINT32 sensorElevatorEnterChannel;
-
-
-	const UINT32 jsDriveButtonReverse;
-	const UINT32 jsDriveButtonShoot;
-	const UINT32 jsDriveButtonShootPos;
-	const UINT32 jsDriveButtonPickUpPos;
-
-	const double jsDriveDeadbandXMax;
-	const double jsDriveDeadbandXMin;
-	const double jsDriveDeadbandYMax;
-	const double jsDriveDeadbandYMin;
-
-	const double ballDiameter;
-
-	Constants ( ):
-		motorLSlot(1),
-		motorLChannel(1),
-		motorRSlot(1),
-		motorRChannel(2),
-		bottomElevatorMotorSlot(1),
-		bottomElevatorMotorChannel(3),//Change later
-		topElevatorMotorSlot(1),
-		topElevatorMotorChannel(4),//Change later
-		motorLCorrection(-1),
-		motorRCorrection(1),
-		bottomElevatorMotorCorrection(1),
-		topElevatorMotorCorrection(1),
-
-		accel1Slot(1),
-		accel1Channel(3),
-
-		jsDrivePort(1),
-		jsDriveMaxX(1),
-		jsDriveMaxY(1),
-
-		sensorElevatorTopSlot(1),
-		sensorElevatorTopChannel(9),
-		sensorElevatorInSlot(1),
-		sensorElevatorInChannel(10),
-		sensorElevatorEnterSlot (1),
-		sensorElevatorEnterChannel(11),
+	extern const UINT32 sensorElevatorTopSlot;
+	extern const UINT32 sensorElevatorTopChannel;
+	extern const UINT32 sensorElevatorInSlot;
+	extern const UINT32 sensorElevatorInChannel;
+	extern const UINT32 sensorElevatorEnterSlot;
+	extern const UINT32 sensorElevatorEnterChannel;
 
 
+	extern const UINT32 jsDriveButtonReverse;
+	extern const UINT32 jsDriveButtonShoot;
+	extern const UINT32 jsDriveButtonShootPos;
+	extern const UINT32 jsDriveButtonDrivePos;
+	extern const UINT32 jsDriveButtonSweeperForwards;
+	extern const UINT32 jsDriveButtonSweeperBackwards;
 
-		jsDriveButtonReverse(5),
-		jsDriveButtonShoot(1),
-		jsDriveButtonShootPos(6),
-		jsDriveButtonPickUpPos(7),
-		jsDriveDeadbandXMax(0.05),
-		jsDriveDeadbandXMin(-0.05),
-		jsDriveDeadbandYMax(0.05),
-		jsDriveDeadbandYMin(-0.05),
-		ballDiameter(9)
-	{
+	extern const double jsDriveDeadbandXMax;
+	extern  double jsDriveDeadbandXMin;
+	extern const double jsDriveDeadbandYMax;
+	extern const double jsDriveDeadbandYMin;
 
-	}
-};
+	extern const double ballDiameter;
+	extern const double elevatorBallSpeed;
 
-extern Constants constants;
+	extern const double PickerUpperForwardsSpeed;
+	extern const double PickerUpperBackwardsSpeed;
+	
+	extern const double ballPassingBySensorTime;
+}
 
 #endif

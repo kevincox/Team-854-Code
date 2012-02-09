@@ -1,5 +1,7 @@
 #ifndef PICKERUPPER_H
 #define PICKERUPPER_H
+#include <SpeedController.h>
+#include "constants.hpp"
 
 
 class PickerUpper
@@ -14,10 +16,13 @@ public:
 	~PickerUpper();
 
 	void spin();
-	void reverseDirection();
-	void update();
-	void setSpeed(int speed);
+	PickerUpper * reverseDirection(bool forwards);
+	PickerUpper * update();
+	void setSpeed(double speed);
 	double getSpeed();
+	PickerUpper *goForwards();
+	PickerUpper *goBackwards();
+	bool isForward();
 
 };
 

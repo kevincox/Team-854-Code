@@ -1,4 +1,4 @@
-#include "pickerupper.h"
+#include "pickerupper.hpp"
 
 PickerUpper::PickerUpper(SpeedController *motor)
 {
@@ -8,25 +8,25 @@ PickerUpper::PickerUpper(SpeedController *motor)
 
 PickerUpper::~PickerUpper()
 {
-
 }
 
-void PickerUpper::spin()
+PickerUpper *PickerUpper::reverseDirection(bool forwards)
+{
+	if (forwards) 		this->goForwards();
+	else if (!forwards) this->goBackwards();
+	else cerr << "IDK WHATS GOING ON WITH PICKERUPPER!!!" << endl;
+	update();
+	return this;
+}
+
+PickerUpper *PickerUpper::update()
 {
 	motor->Set(speed);
+	
+	return this;
 }
 
-void PickerUpper::reverseDirection()
-{
-	speed *= -1;
-}
-
-void PickerUpper::update(bool spin)
-{
-	if(spin) spin;
-}
-
-void PickerUpper::setSpeed(int speed)
+void PickerUpper::setSpeed(double speed)
 {
 	this->speed = speed;
 }
@@ -34,4 +34,24 @@ void PickerUpper::setSpeed(int speed)
 double PickerUpper::getSpeed()
 {
 	return speed;
+}
+
+PickerUpper *PickerUpper::goForwards()
+{
+	if(speed < 0)speed *= -1;
+	if(speed == 0)speed = Constants::PickerUpperForwardsSpeed;
+	return this;
+}
+
+PickerUpper *PickerUpper::goBackwards()
+{
+	if(speed > 0)speed *= -1;
+	if(speed == 0)speed = Constants::PickerUpperBackwardsSpeed;
+	return this;
+}
+
+bool PickerUpper::isForward()
+{
+	if (speed >= 0) return true;
+	else            return false;
 }

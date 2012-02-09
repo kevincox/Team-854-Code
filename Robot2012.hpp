@@ -10,17 +10,17 @@ using namespace std;
 class Robot2012;
 
 #include "drive.hpp"
-#include "constants.hpp"
 #include "input.hpp"
 #include "sensor.hpp"
 #include "dsoutput.hpp"
 #include "elevator.hpp"
+#include "pickerupper.hpp"
 
 class Robot2012 : public IterativeRobot
 {
 public:
 	Drive *drive;
-	SpeedController *ml, *mr;
+	SpeedController *ml, *mr, *eb, *et, *b;
 
 	Input *inputs;
 	Sensor *sensors;
@@ -29,6 +29,8 @@ public:
 	DigitalInput *elevatorSensorTop;
 	DigitalInput *elevatorSensorIn;
 	DigitalInput *elevatorSensorEnter;
+	
+	PickerUpper *brush;
 
 	DSOutput *output;
 

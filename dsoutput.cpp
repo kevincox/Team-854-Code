@@ -33,6 +33,23 @@ void DSOutput::update()
 	out->PrintfLine(l2, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");
 	out->PrintfLine(l3, "L: % .4lf   R: % .4lf",
 	                 drive->getLeftSpeed(), drive->getRightSpeed());
+	out->PrintfLine(l4, "Sweeper %s reversed.", robot->brush->isForward()?"IS":"NOT");
+	switch (robot->elevator->getPosition())	
+	{
+		case Elevator::drivePos:
+			out->PrintfLine(l5, "E position is drive.");
+			break;
+		case Elevator::shootPos:
+			out->PrintfLine(l5, "E position is shoot.");
+			break;
+		case Elevator::shooting:
+			out->PrintfLine(l5, "E position is shooting.");
+			break;
+		default:
+			out->PrintfLine(l5, "uh oh");
+			break;
+	}
+	out->PrintfLine(l6, "Number of Balls: %d.", robot->elevator->getNumOfBalls());
 
 	out->UpdateLCD();
 }

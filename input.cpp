@@ -2,9 +2,11 @@
 #include "constants.hpp"
 
 Input::Input():
-	jsDrive(constants.jsDrivePort)
+	jsDrive(Constants::jsDrivePort)
 {
 	driveIsFlipped = false;
+	pos = Elevator::drivePos;
+	numOfBallsToShoot = 0;
 }
 
 Input::~Input()
@@ -22,38 +24,45 @@ Vector Input::driveDirection()
 void Input::update()
 {
 	driveDir = Vector(Vector::xy,
-	                   jsDrive.GetX()/constants.jsDriveMaxX,
-	                   jsDrive.GetY()/constants.jsDriveMaxY*(-1)
+	                   jsDrive.GetX()/Constants::jsDriveMaxX,
+	                   jsDrive.GetY()/Constants::jsDriveMaxY*(-1)
 	                 );
 
-	if ( driveDir.x < constants.jsDriveDeadbandXMax &&
-		 driveDir.x > constants.jsDriveDeadbandXMin ) driveDir.x = 0;
-	if ( driveDir.y < constants.jsDriveDeadbandYMax &&
-		 driveDir.y > constants.jsDriveDeadbandYMin ) driveDir.y = 0;
+	if ( driveDir.x < Constants::jsDriveDeadbandXMax &&
+		 driveDir.x > Constants::jsDriveDeadbandXMin ) driveDir.x = 0;
+	if ( driveDir.y < Constants::jsDriveDeadbandYMax &&
+		 driveDir.y > Constants::jsDriveDeadbandYMin ) driveDir.y = 0;
 
 	bool s;
 
-	s = jsDrive.GetRawButton(constants.jsDriveButtonReverse);
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonReverse);
 	if ( s && !bFlipState ) driveIsFlipped = !driveIsFlipped;
 	bFlipState = s;
 
-	bool shootButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonShoot);
+	if (s)  pos = Elevator::shooting;
 
-	shootButton = jsDrive.GetRawButton(constants.jsDriveButtonShoot);
-	if (shootButton && !shootButtonPressedBefore) numOfBallsToShoot++;
-	shootButtonPressedBefore = shootButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonShootPos);
+	if (s && !shootPosButtonPressedBefore) pos = Elevator::shootPos;
+	shootPosButtonPressedBefore = s;
 
-	bool shootPosButton;
-
-	shootPosButton = jsDrive.GetRawButton(constants.jsDriveButtonShootPos);
-	if(shootPosButton && !shootPosButtonPressedBefore) shootPos++;
-	shootPosButtonPressedBefore = shootPosButton;
-
-	bool pickUpPosButton;
-
-	pickUpPosButton = jsDrive.GetRawButton(constants.jsDriveButtonPickUpPos);
-	if(pickUpPosButton && !pickUpPosButtonPressedBefore)pickUp++;
-	pickUpPosButtonPressedBefore = pickUpPosButton;
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonDrivePos);
+	if (s && !drivePosButtonPressedBefore) pos = Elevator::drivePos;
+	drivePosButtonPressedBefore = s;
+	
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperForwards);
+	if(s && !forwardsButtonPressedBefore)sweeperIsForwards = true;
+	forwardsButtonPressedBefore = s;
+	
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperBackwards);
+	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
+	backwardsButtonPressedBefore = s;
+	
+	if(jsDrive.GetRawButton(Constants::jsDriveButtonShoot) == 0 &&
+			pos == Elevator::shooting )
+	{
+		pos = Elevator::drivePos;
+	}
 }
 
 /*int Input::ballsToShoot()
@@ -64,4 +73,21 @@ void Input::update()
 bool Input::driveFlipped()
 {
 	return driveIsFlipped;
+}
+
+int Input::getNumOfBallsToShoot ()
+{
+	int b =  numOfBallsToShoot;
+	numOfBallsToShoot = 0;
+	return b;
+}
+
+bool Input::getSweeperIsForwards()
+{
+	return sweeperIsForwards;
+}
+
+Elevator::ElevatorPosition Input::getPos()
+{
+	return pos;
 }

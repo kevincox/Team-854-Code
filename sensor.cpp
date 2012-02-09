@@ -13,7 +13,7 @@ Sensor::~Sensor()
 
 void Sensor::init()
 {
-	accels[0] = new Accelerometer(constants.accel1Slot, constants.accel1Channel);
+	accels[0] = new Accelerometer(Constants::accel1Slot, Constants::accel1Channel);
 
 }
 

@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+#define TEST_BOARD
+
 #include "Robot2012.hpp"
 
 Robot2012::Robot2012(void)
@@ -18,8 +20,17 @@ void Robot2012::RobotInit ()
 	inputs = new Input();
 
 	cerr << "Loading Motor Controllers" << endl;
-	ml = new Victor(constants.motorLSlot, constants.motorLChannel);
-	mr = new Victor(constants.motorRSlot, constants.motorRChannel);
+
+#ifdef TEST_BOARD
+	#define SpeedControllerType Jaguar
+#else
+	#define SpeedControllerType Victor
+#endif
+	ml = new SpeedControllerType(Constants::motorLSlot, Constants::motorLChannel);
+	mr = new SpeedControllerType(Constants::motorRSlot, Constants::motorRChannel);
+	eb = new SpeedControllerType(Constants::bottomElevatorMotorSlot, Constants::bottomElevatorMotorChannel);
+	et = new SpeedControllerType(Constants::topElevatorMotorSlot, Constants::topElevatorMotorChannel);
+	 b = new SpeedControllerType(Constants::brushMotorSlot, Constants::brushMotorChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -28,16 +39,18 @@ void Robot2012::RobotInit ()
 	output = new DSOutput(this);
 
 	cerr << "Loading Elevator" << endl;
-	elevatorSensorTop = new DigitalInput(constants.sensorElevatorTopSlot,
-	                                      constants.sensorElevatorTopChannel);
-	elevatorSensorIn = new DigitalInput(constants.sensorElevatorInSlot,
-											constants.sensorElevatorInChannel);
-	elevatorSensorEnter = new DigitalInput(constants.sensorElevatorEnterSlot,
-												constants.sensorElevatorEnterChannel);
-	elevator = new Elevator(NULL, NULL,
+	elevatorSensorTop = new DigitalInput(Constants::sensorElevatorTopSlot,
+	                                     Constants::sensorElevatorTopChannel);
+	elevatorSensorIn = new DigitalInput(Constants::sensorElevatorInSlot,
+										Constants::sensorElevatorInChannel);
+	elevatorSensorEnter = new DigitalInput(Constants::sensorElevatorEnterSlot,
+	                                       Constants::sensorElevatorEnterChannel);
+	elevator = new Elevator(et, eb,
 							NULL, NULL,
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
-
+	cerr << "Loading Picker Upper" << endl;
+	brush = new PickerUpper(b);
+	
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
 }
@@ -45,11 +58,20 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
+	
+	/*
+	for(int x = 1; x < 13; x++)
+	{
+		DigitalInput *sensor = new DigitalInput(1, x);
+		cerr << x <<":"<< sensor->Get() << " ";
+		delete sensor;
+	}
+	cerr << endl;
+	//*/
 }
 
 void Robot2012::DisabledContinuous(void)
 {
-
 }
 
 void Robot2012::AutonomousPeriodic (void)
@@ -65,24 +87,26 @@ void Robot2012::AutonomousContinuous(void)
 void Robot2012::TeleopPeriodic (void)
 {
 	output->update();
-	elevator->testSensor();
 	//cerr << sensors->getAccelVal(1) << endl;
 }
 
 void Robot2012::TeleopContinuous (void)
 {
 	inputs->update();
+	
+	elevator->setPosition(inputs->getPos());
 
-	elevator->update();
-	brush->update();
+	brush->reverseDirection(inputs->getSweeperIsForwards());
 
 	drive->setFlip(inputs->driveFlipped());
-
 	drive->setVelocity(inputs->driveDirection());
+	
+	elevator->calculate();
 	drive->calculate();
 
 	drive->update();
-	elevator->shoot(inputs->numOfBallsToShoot);
+	elevator->update();
+	brush->update();
 }
 
 START_ROBOT_CLASS(Robot2012);
