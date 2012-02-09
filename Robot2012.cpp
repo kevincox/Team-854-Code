@@ -30,7 +30,7 @@ void Robot2012::RobotInit ()
 	mr = new SpeedControllerType(Constants::motorRSlot,         Constants::motorRChannel);
 	eb = new SpeedControllerType(Constants::motorElevatorBSlot, Constants::motorElevatorBChannel);
 	et = new SpeedControllerType(Constants::motorElevatorTSlot, Constants::motorElevatorTChannel);
-	 b = new SpeedControllerType(Constants::motorBrushSlot,     Constants::motorBrushChannel);
+	b  = new SpeedControllerType(Constants::motorBrushSlot,     Constants::motorBrushChannel);
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -39,16 +39,17 @@ void Robot2012::RobotInit ()
 	output = new DSOutput(this);
 
 	cerr << "Loading Elevator" << endl;
-	elevatorSensorTop = new DigitalInput(Constants::sensorElevatorTopSlot,
-	                                     Constants::sensorElevatorTopChannel);
-	elevatorSensorIn = new DigitalInput(Constants::sensorElevatorInSlot,
-	                                    Constants::sensorElevatorInChannel);
+	elevatorSensorTop   = new DigitalInput(Constants::sensorElevatorTopSlot,
+	                                       Constants::sensorElevatorTopChannel);
+	elevatorSensorIn    = new DigitalInput(Constants::sensorElevatorInSlot,
+	                                       Constants::sensorElevatorInChannel);
 	elevatorSensorEnter = new DigitalInput(Constants::sensorElevatorEnterSlot,
 	                                       Constants::sensorElevatorEnterChannel);
 	elevator = new Elevator(et, eb,
 							NULL, NULL,
 							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
 	cerr << "Loading Picker Upper" << endl;
+	
 	brush = new PickerUpper(b);
 
 	cerr << "Initilized\n" <<
