@@ -38,6 +38,10 @@ namespace Constants
 	const UINT32 sensorElevatorInChannel = 2;
 	const UINT32 sensorElevatorEnterSlot = 1;
 	const UINT32 sensorElevatorEnterChannel = 3;
+	const UINT32 startingBallsButton1Slot = 1;
+	const UINT32 startingBallsButton1Channel = 4;
+	const UINT32 startingBallsButton2Slot = 1;
+	const UINT32 startingBallsButton2Channel = 5;
 
 	const UINT32 jsDriveButtonReverse = 5;
 	const UINT32 jsDriveButtonShoot = 1;
@@ -59,4 +63,11 @@ namespace Constants
 	
 	const double shooterTopMotorSpeed = 1.0;
 	const double shooterBottomMotorSpeed = 1.0;
+	
+	const int hueMin = 0;
+	const int hueMax = 255;
+	const int satMin = 0;
+	const int satMax = 255;
+	const int lumMin = 0;
+	const int lumMax = 255;
 }

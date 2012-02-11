@@ -41,6 +41,10 @@ namespace Constants
 	extern const UINT32 sensorElevatorInChannel;
 	extern const UINT32 sensorElevatorEnterSlot;
 	extern const UINT32 sensorElevatorEnterChannel;
+	extern const UINT32 startingBallsButton1Slot;
+	extern const UINT32 startingBallsButton1Channel;
+	extern const UINT32 startingBallsButton2Slot;
+	extern const UINT32 startingBallsButton2Channel;
 
 	extern const UINT32 jsDriveButtonReverse;
 	extern const UINT32 jsDriveButtonShoot;
@@ -62,6 +66,13 @@ namespace Constants
 	
 	extern const double shooterTopMotorSpeed;
 	extern const double shooterBottomMotorSpeed;
+	
+	extern const int hueMin;
+	extern const int hueMax;
+	extern const int satMin;
+	extern const int satMax;
+	extern const int lumMin;
+	extern const int lumMax;
 }
 
 #endif

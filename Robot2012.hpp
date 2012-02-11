@@ -16,6 +16,7 @@ class Robot2012;
 #include "elevator.hpp"
 #include "pickerupper.hpp"
 #include "shooter.hpp"
+#include "camera.hpp"
 
 class Robot2012 : public IterativeRobot
 {
@@ -30,12 +31,16 @@ public:
 	DigitalInput *elevatorSensorTop;
 	DigitalInput *elevatorSensorIn;
 	DigitalInput *elevatorSensorEnter;
+	DigitalInput *startingButton1;
+	DigitalInput *startingButton2;
 	
 	PickerUpper *brush;
 
 	DSOutput *output;
 	
 	Shooter *shooter;
+	
+	//Camera *cam;
 
 	Robot2012(void);
 	void RobotInit ();

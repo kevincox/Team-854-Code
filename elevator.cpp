@@ -4,7 +4,7 @@
 Elevator::Elevator(SpeedController *top, SpeedController *bottom,
                     Encoder *eTop, Encoder *eBottom,
                     DigitalInput *iTop, DigitalInput *iIn,
-      	            DigitalInput *iEnter
+      	            DigitalInput *iEnter, int numOfBalls
                   )
 {
 	init();
@@ -16,11 +16,14 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 	this->iTop = iTop;
 	this->iIn = iIn;
 	this->iEnter = iEnter;
+	
+	while ( numOfBalls-- )
+		newBall();
 }
 
 Elevator *Elevator::calculate()
 {	
-	this->calculateBalls();
+	if (calculateBalls()) return this;
 	
 	if (!ball1)
 	{
@@ -118,17 +121,23 @@ Elevator *Elevator::setPosition(ElevatorPosition pos)
 	return this;
 }
 
-Elevator *Elevator::calculateBalls()
+bool Elevator::calculateBalls()
 {
+	bool handled = false;
+	
 	bool iEnterOn = iEnter->Get();
 	bool iTopOn = iTop->Get();
 	
 	//cerr << "Time: " << tITop.Get() << endl;
 	if (limboBall == true)
+	{
 		moveBallUp();
+		handled = true;
+	}
 	else if (iEnterOn && !iEnterOnBefore)
 	{
 		this->pickUpBall();
+		handled = true;
 	}
 	
 	iEnterOnBefore = iEnterOn;
@@ -151,7 +160,8 @@ Elevator *Elevator::calculateBalls()
 		tITop.Stop();  // Reset the timer.
 		tITop.Reset(); //
 	}
-	return this;
+	
+	return handled;
 }
 
 bool Elevator::pickUpBall()

@@ -42,6 +42,14 @@ void Robot2012::RobotInit ()
 	output = new DSOutput(this);
 
 	cerr << "Loading Elevator" << endl;
+	startingButton1 = new DigitalInput(Constants::startingBallsButton1Slot,
+										Constants::startingBallsButton1Channel);
+	startingButton2 = new DigitalInput(Constants::startingBallsButton2Slot,
+			                            Constants::startingBallsButton2Channel);
+	
+	int numOfBalls = startingButton1->Get();
+	numOfBalls += startingButton2->Get() << 1;
+	
 	elevatorSensorTop   = new DigitalInput(Constants::sensorElevatorTopSlot,
 	                                       Constants::sensorElevatorTopChannel);
 	elevatorSensorIn    = new DigitalInput(Constants::sensorElevatorInSlot,
@@ -50,14 +58,18 @@ void Robot2012::RobotInit ()
 	                                       Constants::sensorElevatorEnterChannel);
 	elevator = new Elevator(et, eb,
 							NULL, NULL,
-							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter);
+							elevatorSensorTop, elevatorSensorIn, elevatorSensorEnter,
+							numOfBalls);
 	cerr << "Loading Picker Upper" << endl;
 	
 	brush = new PickerUpper(b);
 	
 	cerr << "Loading Shooter" << endl;
 	shooter = new Shooter(sb, st);
-
+	
+	cerr << "Loading Camera" << endl;
+	//cam = new Camera();
+	
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
 }
@@ -65,6 +77,7 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
+	//cam->enable();
 
 	/*
 	for(int x = 1; x < 13; x++)
@@ -84,6 +97,7 @@ void Robot2012::DisabledContinuous(void)
 void Robot2012::AutonomousPeriodic (void)
 {
 	output->update();
+	//cam->update();
 }
 
 void Robot2012::AutonomousContinuous(void)

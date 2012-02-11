@@ -15,10 +15,12 @@ Shooter *Shooter::calculate()
 {
 	topMotorSpeed = Constants::shooterTopMotorSpeed;
 	bottomMotorSpeed = Constants::shooterBottomMotorSpeed;
+	return this;
 }
 
 Shooter *Shooter::update()
 {
 	topMotor->Set(topMotorSpeed);
 	bottomMotor->Set(bottomMotorSpeed);
+	return this;
 }

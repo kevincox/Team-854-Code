@@ -43,7 +43,7 @@ public:
 	Elevator(SpeedController *top, SpeedController *bottom,
 	          Encoder *eTop, Encoder *eBottom,
 	          DigitalInput *iTop, DigitalInput *iIn,
-	          DigitalInput *iEnter
+	          DigitalInput *iEnter, int numOfBalls
 	        );
 
 	Elevator *calculate (void);
@@ -60,7 +60,7 @@ public:
 
 	ElevatorPosition getPosition(void);
 	Elevator *setPosition(ElevatorPosition pos);
-	Elevator *calculateBalls();
+	bool calculateBalls();
 	int getNumOfBalls(); 
 
 };
