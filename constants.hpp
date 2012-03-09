@@ -60,12 +60,13 @@ namespace Constants
 
 	extern const double ballDiameter;
 	extern const double elevatorBallSpeed;
+	extern const double elevatorBallSpeediEnter;
 
 	extern const double PickerUpperForwardsSpeed;
 	extern const double PickerUpperBackwardsSpeed;
 	
-	extern const double shooterTopMotorSpeed;
-	extern const double shooterBottomMotorSpeed;
+	extern const double shooterTopMotorModifier;
+	extern const double shooterBottomMotorModifier;
 	
 	extern const int hueMin;
 	extern const int hueMax;

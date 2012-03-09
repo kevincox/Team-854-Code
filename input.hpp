@@ -8,7 +8,8 @@
 class Input
 {
 private:
-	Joystick jsDrive;
+public:Joystick jsDrive;
+private:
 
 	Vector driveDir;
 	
@@ -37,6 +38,8 @@ public:
 	int getNumOfBallsToShoot();
 	bool getSweeperIsForwards();
 	Elevator::ElevatorPosition getPos();
+	float getShooterSpeed( void );
+
 };
 
 #endif

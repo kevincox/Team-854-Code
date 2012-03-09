@@ -13,8 +13,8 @@ void Robot2012::RobotInit ()
 {
 	cerr << "Initilizing" << endl;
 
-	cerr << "Loading Sensors" << endl;
-	sensors = new Sensor();
+	//cerr << "Loading Sensors" << endl;
+	//sensors = new Sensor();
 
 	cerr << "Loading Human Inputs" << endl;
 	inputs = new Input();
@@ -33,7 +33,6 @@ void Robot2012::RobotInit ()
 	b  = new SpeedControllerType(Constants::motorBrushSlot,     Constants::motorBrushChannel);
 	sb = new SpeedControllerType(Constants::motorShooterBSlot,  Constants::motorShooterBChannel);
 	st = new SpeedControllerType(Constants::motorShooterTSlot,  Constants::motorShooterTChannel);
-
 
 	cerr << "Loading Drive System" << endl;
 	drive = new Drive(ml, mr);
@@ -66,9 +65,9 @@ void Robot2012::RobotInit ()
 	
 	cerr << "Loading Shooter" << endl;
 	shooter = new Shooter(sb, st);
-	
+		
 	cerr << "Loading Camera" << endl;
-	//cam = new Camera();
+	cam = new Camera();
 	
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
@@ -77,7 +76,9 @@ void Robot2012::RobotInit ()
 void Robot2012::DisabledPeriodic (void)
 {
 	output->update();
-	//cam->enable();
+	//cerr << "iIn Value: " << i.Get() << endl;
+	//cerr <<  "This is the throttle value: " << inputs->getShooterSpeed() << endl;
+	cam->enable();
 
 	/*
 	for(int x = 1; x < 13; x++)
@@ -97,7 +98,7 @@ void Robot2012::DisabledContinuous(void)
 void Robot2012::AutonomousPeriodic (void)
 {
 	output->update();
-	//cam->update();
+	cam->update();
 }
 
 void Robot2012::AutonomousContinuous(void)
@@ -113,6 +114,15 @@ void Robot2012::TeleopPeriodic (void)
 
 void Robot2012::TeleopContinuous (void)
 {
+	/*inputs->update();
+	double s = inputs->driveDirection().y;
+	cerr << "Setting to: " << s <<endl;
+	eb->Set(s);
+	
+	b->Set(1);
+	
+	return;//*/
+	
 	inputs->update();
 
 	elevator->setPosition(inputs->getPos());
@@ -122,6 +132,7 @@ void Robot2012::TeleopContinuous (void)
 
 	elevator->calculate();
 	drive->calculate();
+	shooter->calculate(inputs->getShooterSpeed());
 	
 	bool dir = inputs->getSweeperIsForwards() && !elevator->isFull();
 	brush->setDirection(dir);
@@ -129,6 +140,7 @@ void Robot2012::TeleopContinuous (void)
 	drive->update();
 	elevator->update();
 	brush->update();
+	shooter->update();
 }
 
 START_ROBOT_CLASS(Robot2012);

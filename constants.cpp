@@ -9,7 +9,7 @@ namespace Constants
 	const UINT32 motorElevatorBSlot = 1;
 	const UINT32 motorElevatorBChannel = 3;
 	const UINT32 motorElevatorTSlot = 1;
-	const UINT32 motorElevatorTChannel = 3;
+	const UINT32 motorElevatorTChannel = 8;
 	const UINT32 motorShooterBSlot = 1;
 	const UINT32 motorShooterBChannel = 5;
 	const UINT32 motorShooterTSlot = 1;
@@ -57,17 +57,18 @@ namespace Constants
 
 	const double ballDiameter = 9;
 	const double elevatorBallSpeed = 0.25;
+	const double elevatorBallSpeediEnter = 0.25;
 
 	const double PickerUpperForwardsSpeed = 1.0;
 	const double PickerUpperBackwardsSpeed = -1.0;
 	
-	const double shooterTopMotorSpeed = 1.0;
-	const double shooterBottomMotorSpeed = 1.0;
+	const double shooterTopMotorModifier = 1.0;
+	const double shooterBottomMotorModifier = 1.0;
 	
 	const int hueMin = 0;
-	const int hueMax = 255;
+	const int hueMax = 100;
 	const int satMin = 0;
-	const int satMax = 255;
+	const int satMax = 100;
 	const int lumMin = 0;
-	const int lumMax = 255;
+	const int lumMax = 100;
 }

@@ -16,7 +16,7 @@ public:
 	Shooter(SpeedController *topMotor, SpeedController *bottomMotor);
 	~Shooter();
 	
-	Shooter *calculate();
+	Shooter *calculate(float speed);
 	Shooter *update();
 	
 };

@@ -40,7 +40,7 @@ public:
 	
 	Shooter *shooter;
 	
-	//Camera *cam;
+	Camera *cam;
 
 	Robot2012(void);
 	void RobotInit ();

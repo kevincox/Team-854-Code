@@ -17,6 +17,8 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 	this->iIn = iIn;
 	this->iEnter = iEnter;
 	
+	limboBall = false;
+	
 	while ( numOfBalls-- )
 		newBall();
 }
@@ -24,6 +26,11 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 Elevator *Elevator::calculate()
 {	
 	if (calculateBalls()) return this;
+	if (pos == shooting)
+	{
+		speed = 1;
+		return this;
+	}
 	
 	if (!ball1)
 	{
@@ -31,18 +38,21 @@ Elevator *Elevator::calculate()
 	}
 	else if (pos == drivePos)
 	{
-		if (iIn->Get() == 1) speed = 0;
-		else speed = -1;
+		if (iIn->Get() == 1) 
+		{
+			speed = 0;
+			cerr << "Going down, not! iIn: " << iIn->Get() << endl;
+		}
+		else 
+		{
+			speed = -1;
+			cerr << "Going down!" << endl;
+		}
 	}
 	else if (pos == shootPos)
 	{
 		if (iTop->Get() == 1) speed = 0;
 		else speed = 1;
-	}
-	else if(pos == shooting)
-	{
-		if(getNumOfBalls() > 0)speed = 1;
-		else speed = 0;
 	}
 	else cerr << "[Elevator::calculate()] This should not be printed." << endl;
 	return this;
@@ -50,8 +60,10 @@ Elevator *Elevator::calculate()
 
 Elevator *Elevator::update()
 {
-	top->Set(speed);
-	bottom->Set(speed);
+	//top->Set(speed);
+	bottom->Set(-speed);
+	
+	cerr << "SPEED: " << speed << endl;
 
 	return this;
 }
@@ -124,23 +136,39 @@ Elevator *Elevator::setPosition(ElevatorPosition pos)
 bool Elevator::calculateBalls()
 {
 	bool handled = false;
-	
-	bool iEnterOn = iEnter->Get();
+
+	bool iEnterOn = !iEnter->Get();
+	bool iInOn = iIn->Get();
 	bool iTopOn = iTop->Get();
 	
-	//cerr << "Time: " << tITop.Get() << endl;
-	if (limboBall == true)
+	if (iInOn)
 	{
-		moveBallUp();
+		limboBall = false;
+	}
+	if( iEnterOn && tIEnter.Get() == 0)
+	{
+		tIEnter.Start();
+	}
+	else if( !iEnterOn && tIEnter.Get() > Constants::elevatorBallSpeediEnter)
+	{
+		if ( speed > 0 )
+		{
+			newBall();
+		}
+	}
+	if( !iEnterOn )
+	{
+		tIEnter.Stop();
+		tIEnter.Reset();
+	}
+	if ( iEnterOn || limboBall )
+	{
+		speed = 1;
+		limboBall = true;
 		handled = true;
 	}
-	else if (iEnterOn && !iEnterOnBefore)
-	{
-		this->pickUpBall();
-		handled = true;
-	}
-	
 	iEnterOnBefore = iEnterOn;
+	
 	if( iTopOn && tITop.Get() == 0) // Ball was not previously in sensor.
 	{
 		tITop.Start();
@@ -164,36 +192,6 @@ bool Elevator::calculateBalls()
 	return handled;
 }
 
-bool Elevator::pickUpBall()
-{
-	this->newBall();
-	if (pos == shooting || isFull()) //do nothing, keep shooting
-		return false;
-	else if (iIn->Get())
-	{
-		moveBallUp();
-		return true;
-	}
-	else
-	{
-		speed = -1;
-		return false;
-	}
-
-}
-
-Elevator *Elevator::moveBallUp()
-{
-	if (iEnter || iIn)
-	{
-		speed = 1;
-		limboBall = true;
-	}
-	else
-		limboBall = false;
-	
-	return this;
-}
 int Elevator::getNumOfBalls()
 {
 	if      (ball3 != NULL) return 3;

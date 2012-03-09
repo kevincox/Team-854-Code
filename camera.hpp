@@ -6,8 +6,7 @@
 #include <Timer.h>
 
 class Camera {
-	AxisCamera *cam;
-	ColorImage *ci;
+	ColorImage ci;
 	bool take;
 	
 public:

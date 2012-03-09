@@ -11,10 +11,10 @@ Shooter::~Shooter()
 {
 }
 
-Shooter *Shooter::calculate()
+Shooter *Shooter::calculate(float speed)
 {
-	topMotorSpeed = Constants::shooterTopMotorSpeed;
-	bottomMotorSpeed = Constants::shooterBottomMotorSpeed;
+	topMotorSpeed = speed * Constants::shooterTopMotorModifier;
+	bottomMotorSpeed = speed * Constants::shooterBottomMotorModifier;
 	return this;
 }
 

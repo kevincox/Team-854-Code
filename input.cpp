@@ -10,6 +10,7 @@ Input::Input():
 	shooting = false;
 	
 	numOfBallsToShoot = 0;
+	sweeperIsForwards = true;
 }
 
 Input::~Input()
@@ -87,4 +88,9 @@ Elevator::ElevatorPosition Input::getPos()
 {
 	if (shooting) return Elevator::shooting;
 	return pos;
+}
+
+float Input::getShooterSpeed( void )
+{
+	return (jsDrive.GetThrottle()*-1 + 1) / 2;
 }

@@ -61,7 +61,7 @@ public:
 	ElevatorPosition getPosition(void);
 	Elevator *setPosition(ElevatorPosition pos);
 	bool calculateBalls();
-	int getNumOfBalls(); 
+	int getNumOfBalls();
 
 };
 
