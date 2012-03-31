@@ -17,6 +17,7 @@ public:
 	const static ElevatorPosition drivePos = 1;
 	const static ElevatorPosition shootPos = 2;
 	const static ElevatorPosition shooting = 3;
+	const static ElevatorPosition pooping = 4;
 
 private:
 	ElevatorPosition pos;
@@ -46,7 +47,7 @@ public:
 	          DigitalInput *iEnter, int numOfBalls
 	        );
 
-	Elevator *calculate (void);
+	Elevator *calculate (int ballAdjustment);
 	Elevator *update(void);
 
 	Elevator* shootPosition();
@@ -60,9 +61,10 @@ public:
 
 	ElevatorPosition getPosition(void);
 	Elevator *setPosition(ElevatorPosition pos);
-	bool calculateBalls();
+	bool calculateBalls(int ballAdjustment);
 	int getNumOfBalls();
-
+	Elevator* setSpeed(int newSpeed);
+	Elevator* setBalls(int newBalls);
 };
 
 #endif // ELEVATOR_HPP

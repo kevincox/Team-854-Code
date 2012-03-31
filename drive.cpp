@@ -16,7 +16,7 @@ Drive::Drive(SpeedController *left, SpeedController *right):
 
 void Drive::init()
 {
-	this->flipped = false;
+	this->flipped = true;
 }
 
 Drive::~Drive()
@@ -39,7 +39,7 @@ void Drive::calculate()
 	leftSpeed  *= scale; // Scale to the `-1 < speed < 1` range.
 	rightSpeed *= scale;
 
-	//fprintf(stderr, "l: % .4lf r: % .4lf\n", ls, rs);
+	fprintf(stderr, "l: % .4lf r: % .4lf\n", leftSpeed, rightSpeed);
 }
 
 void Drive::update()

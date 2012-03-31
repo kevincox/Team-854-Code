@@ -30,10 +30,10 @@ void DSOutput::update()
 	else                                 out->PrintfLine(l1, "Mode: WTF?!? I have no clue.");
 
 
-	out->PrintfLine(l2, "Drive %s reversed.", drive->isFlipped()?"IS":"NOT");
+	out->PrintfLine(l2, "Drive %s reversed. and sweeper is %s reversed", drive->isFlipped()?"IS":"NOT", robot->brush->isForward()?"IS":"NOT");
 	out->PrintfLine(l3, "L: % .4lf   R: % .4lf",
 	                 drive->getLeftSpeed(), drive->getRightSpeed());
-	out->PrintfLine(l4, "Sweeper %s reversed.", robot->brush->isForward()?"IS":"NOT");
+	out->PrintfLine(l4, "Shooter Speed %.4lf.", robot->inputs->getShooterSpeed());
 	switch (robot->elevator->getPosition())	
 	{
 		case Elevator::drivePos:

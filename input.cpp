@@ -10,6 +10,7 @@ Input::Input():
 	shooting = false;
 	
 	numOfBallsToShoot = 0;
+	numOfBallsToAdd = 0;
 	sweeperIsForwards = true;
 }
 
@@ -60,6 +61,14 @@ void Input::update()
 	s = jsDrive.GetRawButton(Constants::jsDriveButtonSweeperBackwards);
 	if(s && !backwardsButtonPressedBefore)sweeperIsForwards = false;
 	backwardsButtonPressedBefore = s;
+	
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonAddBall);
+	if(s && !addBallButtonPressedBefore) numOfBallsToAdd++;
+	addBallButtonPressedBefore = s;
+	
+	s = jsDrive.GetRawButton(Constants::jsDriveButtonDeleteBall);
+	if(s && !deleteBallButtonPressedBefore) numOfBallsToAdd--;
+	deleteBallButtonPressedBefore = s;
 }
 
 /*int Input::ballsToShoot()
@@ -93,4 +102,11 @@ Elevator::ElevatorPosition Input::getPos()
 float Input::getShooterSpeed( void )
 {
 	return (jsDrive.GetThrottle()*-1 + 1) / 2;
+}
+
+int Input::getNumOfBallsToAdd( void )
+{
+	int returnThis = numOfBallsToAdd;
+	numOfBallsToAdd = 0;
+	return returnThis;
 }

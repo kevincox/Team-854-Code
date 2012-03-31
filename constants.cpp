@@ -47,28 +47,33 @@ namespace Constants
 	const UINT32 jsDriveButtonShoot = 1;
 	const UINT32 jsDriveButtonShootPos = 6;
 	const UINT32 jsDriveButtonDrivePos = 7;
+	const UINT32 jsDriveButtonDeleteBall = 8;
+	const UINT32 jsDriveButtonAddBall = 9;
 	const UINT32 jsDriveButtonSweeperForwards = 11;
 	const UINT32 jsDriveButtonSweeperBackwards = 10;
 
-	const double jsDriveDeadbandXMax = 0.05;
-	const double jsDriveDeadbandXMin = -0.05;
-	const double jsDriveDeadbandYMax = 0.05;
-	const double jsDriveDeadbandYMin = -0.05;
+	const double jsDriveDeadbandXMax = 0.06;
+	const double jsDriveDeadbandXMin = -0.06;
+	const double jsDriveDeadbandYMax = 0.08;
+	const double jsDriveDeadbandYMin = -0.06;
 
 	const double ballDiameter = 9;
 	const double elevatorBallSpeed = 0.25;
 	const double elevatorBallSpeediEnter = 0.25;
+	const double elevatorBallSpeediIn = 0.10;
 
 	const double PickerUpperForwardsSpeed = 1.0;
 	const double PickerUpperBackwardsSpeed = -1.0;
 	
-	const double shooterTopMotorModifier = 1.0;
-	const double shooterBottomMotorModifier = 1.0;
+	const double shooterTopMotorModifier = 1.00;
+	const double shooterBottomMotorModifier = -1.00;
 	
 	const int hueMin = 0;
-	const int hueMax = 100;
+	const int hueMax = 255;
 	const int satMin = 0;
-	const int satMax = 100;
-	const int lumMin = 0;
-	const int lumMax = 100;
+	const int satMax = 255;
+	const int lumMin = 235;
+	const int lumMax = 255;
+	
+	const double autonomousShootingSpeed = 1.00;
 }

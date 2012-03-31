@@ -6,6 +6,7 @@ using namespace std;
 
 #include "WPILib.h"
 #include <Victor.h>
+#include <Timer.h>
 
 class Robot2012;
 
@@ -17,9 +18,12 @@ class Robot2012;
 #include "pickerupper.hpp"
 #include "shooter.hpp"
 #include "camera.hpp"
+#include "backgroundcamera.hpp"
 
 class Robot2012 : public IterativeRobot
 {
+private:
+	Timer timer;
 public:
 	Drive *drive;
 	SpeedController *ml, *mr, *eb, *et, *b, *sb, *st;
@@ -46,8 +50,10 @@ public:
 	void RobotInit ();
 	void DisabledPeriodic(void);
 	void DisabledContinuous(void);
+	void AutonomousInit(void);
 	void AutonomousPeriodic(void);
 	void AutonomousContinuous(void);
+	void TeleopInit(void);
 	void TeleopPeriodic (void);
 	void TeleopContinuous (void);
 };

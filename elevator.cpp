@@ -23,35 +23,40 @@ Elevator::Elevator(SpeedController *top, SpeedController *bottom,
 		newBall();
 }
 
-Elevator *Elevator::calculate()
+Elevator *Elevator::calculate(int ballAdjustment)
 {	
-	if (calculateBalls()) return this;
-	if (pos == shooting)
+	if (pos == pooping)
+	{
+		speed = -1;
+		return this;
+	}
+	else if (pos == shooting)
 	{
 		speed = 1;
 		return this;
 	}
-	
+	if (calculateBalls(ballAdjustment)) return this;
 	if (!ball1)
 	{
 		speed = 0;
 	}
 	else if (pos == drivePos)
 	{
-		if (iIn->Get() == 1) 
+		//cerr<<"HEY! I GOT TO THE DRIVEPOS PART!"<<endl;
+		if (iIn->Get()) 
 		{
 			speed = 0;
-			cerr << "Going down, not! iIn: " << iIn->Get() << endl;
+			//cerr << "Going down, not! iIn: " << iIn->Get() << endl;
 		}
 		else 
 		{
 			speed = -1;
-			cerr << "Going down!" << endl;
+			//cerr << "Going down!" << endl;
 		}
 	}
 	else if (pos == shootPos)
 	{
-		if (iTop->Get() == 1) speed = 0;
+		if (iTop->Get()) speed = 0;
 		else speed = 1;
 	}
 	else cerr << "[Elevator::calculate()] This should not be printed." << endl;
@@ -63,7 +68,7 @@ Elevator *Elevator::update()
 	//top->Set(speed);
 	bottom->Set(-speed);
 	
-	cerr << "SPEED: " << speed << endl;
+	//cerr << "SPEED: " << speed << endl;
 
 	return this;
 }
@@ -79,6 +84,8 @@ void Elevator::init(void)
 
 void Elevator::newBall (void)
 {
+	if (ball3) return;
+	
 	ball3 = ball2;
 	ball2 = ball1;
 	ball1 = new Ball(0);
@@ -133,7 +140,7 @@ Elevator *Elevator::setPosition(ElevatorPosition pos)
 	return this;
 }
 
-bool Elevator::calculateBalls()
+bool Elevator::calculateBalls(int ballAdjustment)
 {
 	bool handled = false;
 
@@ -141,9 +148,27 @@ bool Elevator::calculateBalls()
 	bool iInOn = iIn->Get();
 	bool iTopOn = iTop->Get();
 	
-	if (iInOn)
+	for(; ballAdjustment > 0; ballAdjustment--)
+		newBall();
+	
+	for(; ballAdjustment < 0; ballAdjustment++)
+		doShoot();
+	//bool limboBallBefore = limboBall;
+	if( iInOn && tIIn.Get() == 0)
+	{
+		tIIn.Start();
+	}
+	else if( !iInOn && tIIn.Get() > Constants::elevatorBallSpeediIn)
 	{
 		limboBall = false;
+		handled = false; 
+		//if(limboBallBefore)
+			//cerr<<"Ball Has now Passed out of limbo"<<endl;
+	}
+	if( !iInOn )
+	{
+		tIIn.Stop();
+		tIIn.Reset();
 	}
 	if( iEnterOn && tIEnter.Get() == 0)
 	{
@@ -166,6 +191,8 @@ bool Elevator::calculateBalls()
 		speed = 1;
 		limboBall = true;
 		handled = true;
+		//if(!limboBallBefore)
+			//cerr<<"Ball is now in limbo"<<endl;
 	}
 	iEnterOnBefore = iEnterOn;
 	
@@ -198,4 +225,19 @@ int Elevator::getNumOfBalls()
 	else if (ball2 != NULL) return 2;
 	else if (ball1 != NULL) return 1;
 	else return 0;
+}
+
+Elevator* Elevator::setSpeed(int newSpeed)
+{
+	speed = newSpeed;
+	return this;
+}
+
+Elevator* Elevator::setBalls(int newBalls)
+{
+	while(getNumOfBalls() > newBalls)
+		doShoot();
+	while(getNumOfBalls() < newBalls)
+		newBall();
+	return this;
 }

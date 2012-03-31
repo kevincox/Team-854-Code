@@ -65,10 +65,13 @@ void Robot2012::RobotInit ()
 	
 	cerr << "Loading Shooter" << endl;
 	shooter = new Shooter(sb, st);
-		
+	
+	/*
 	cerr << "Loading Camera" << endl;
 	cam = new Camera();
-	
+	pthread_t camera;
+	pthread_create(&camera, NULL, &Camera::main, (void*)cam);
+	*/
 	cerr << "Initilized\n" <<
 		"-------------------------" << endl;
 }
@@ -95,15 +98,50 @@ void Robot2012::DisabledContinuous(void)
 {
 }
 
-void Robot2012::AutonomousPeriodic (void)
+void Robot2012::AutonomousInit(void)
 {
-	output->update();
-	cam->update();
+	timer.Reset();
+	timer.Start();
+	
+	if ( Constants::autonomousShootingSpeed > 0 )
+		shooter->calculate(Constants::autonomousShootingSpeed);
+	else shooter->calculate(0);
+	
+	shooter->update();
+	brush->setSpeed(1);
+	brush->update();
+	
+	if(Constants::autonomousShootingSpeed >= 0.0)
+		elevator->setPosition(Elevator::shootPos);
+	else
+		elevator->setPosition(Elevator::drivePos);
+}
+
+void Robot2012::AutonomousPeriodic (void)
+{	
+	if ( timer.Get() > 1.0 && Constants::autonomousShootingSpeed >= 0.0)
+	{
+		elevator->setPosition(Elevator::shooting);
+	}
+	else if(timer.Get() > 1.0 && Constants::autonomousShootingSpeed < 0.0)
+	{
+		elevator->setPosition(Elevator::pooping);
+	}
+	elevator->calculate(0);
+	elevator->update();
+	shooter->update();
+	brush->update();
 }
 
 void Robot2012::AutonomousContinuous(void)
 {
 
+}
+
+void Robot2012::TeleopInit(void)
+{
+	if(Constants::autonomousShootingSpeed < 0.0)
+		elevator->setBalls(0);
 }
 
 void Robot2012::TeleopPeriodic (void)
@@ -130,12 +168,12 @@ void Robot2012::TeleopContinuous (void)
 	drive->setFlip(inputs->driveFlipped());
 	drive->setVelocity(inputs->driveDirection());
 
-	elevator->calculate();
+	elevator->calculate(inputs->getNumOfBallsToAdd());
 	drive->calculate();
 	shooter->calculate(inputs->getShooterSpeed());
 	
-	bool dir = inputs->getSweeperIsForwards() && !elevator->isFull();
-	brush->setDirection(dir);
+	//bool dir = inputs->getSweeperIsForwards() && !elevator->isFull();
+	brush->setDirection(/*dir*/true);
 
 	drive->update();
 	elevator->update();

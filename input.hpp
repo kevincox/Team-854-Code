@@ -22,9 +22,12 @@ private:
 	bool drivePosButtonPressedBefore;
 	bool forwardsButtonPressedBefore;
 	bool backwardsButtonPressedBefore;
+	bool addBallButtonPressedBefore;
+	bool deleteBallButtonPressedBefore;
 	bool driveIsFlipped;
 	bool sweeperIsForwards;
 
+	int numOfBallsToAdd;
 	int numOfBallsToShoot;
 
 public:
@@ -39,6 +42,7 @@ public:
 	bool getSweeperIsForwards();
 	Elevator::ElevatorPosition getPos();
 	float getShooterSpeed( void );
+	int getNumOfBallsToAdd( void );
 
 };
 

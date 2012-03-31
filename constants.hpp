@@ -50,6 +50,8 @@ namespace Constants
 	extern const UINT32 jsDriveButtonShoot;
 	extern const UINT32 jsDriveButtonShootPos;
 	extern const UINT32 jsDriveButtonDrivePos;
+	extern const UINT32 jsDriveButtonDeleteBall;
+	extern const UINT32 jsDriveButtonAddBall;
 	extern const UINT32 jsDriveButtonSweeperForwards;
 	extern const UINT32 jsDriveButtonSweeperBackwards;
 
@@ -61,6 +63,7 @@ namespace Constants
 	extern const double ballDiameter;
 	extern const double elevatorBallSpeed;
 	extern const double elevatorBallSpeediEnter;
+	extern const double elevatorBallSpeediIn;
 
 	extern const double PickerUpperForwardsSpeed;
 	extern const double PickerUpperBackwardsSpeed;
@@ -74,6 +77,9 @@ namespace Constants
 	extern const int satMax;
 	extern const int lumMin;
 	extern const int lumMax;
+	
+	extern const bool autonomousShootingMode;
+	extern const double autonomousShootingSpeed;
 }
 
 #endif
