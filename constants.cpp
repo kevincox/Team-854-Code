@@ -51,11 +51,19 @@ namespace Constants
 	const UINT32 jsDriveButtonAddBall = 9;
 	const UINT32 jsDriveButtonSweeperForwards = 11;
 	const UINT32 jsDriveButtonSweeperBackwards = 10;
-
 	const double jsDriveDeadbandXMax = 0.06;
 	const double jsDriveDeadbandXMin = -0.06;
 	const double jsDriveDeadbandYMax = 0.08;
 	const double jsDriveDeadbandYMin = -0.06;
+
+	const UINT32 encoderLeftASlot = 1;
+	const UINT32 encoderLeftAChannel = 6;
+	const UINT32 encoderLeftBSlot = 1;
+	const UINT32 encoderLeftBChannel = 7;
+	const UINT32 encoderRightASlot = 1;
+	const UINT32 encoderRightAChannel = 8;
+	const UINT32 encoderRightBSlot = 1;
+	const UINT32 encoderRightBChannel = 9;
 
 	const double ballDiameter = 9;
 	const double elevatorBallSpeed = 0.25;

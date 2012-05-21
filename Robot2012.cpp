@@ -11,7 +11,7 @@ Robot2012::Robot2012(void)
 
 void Robot2012::RobotInit ()
 {
-	cerr << "Initilizing" << endl;
+	cerr << "Initializing" << endl;
 
 	//cerr << "Loading Sensors" << endl;
 	//sensors = new Sensor();
@@ -66,6 +66,21 @@ void Robot2012::RobotInit ()
 	cerr << "Loading Shooter" << endl;
 	shooter = new Shooter(sb, st);
 	
+	cerr << "Loading Encoder" << endl;
+	lEncoder = new Encoder(Constants::encoderLeftASlot, Constants::encoderLeftAChannel,
+	                       Constants::encoderLeftBSlot, Constants::encoderLeftBChannel
+			              );
+	lEncoder->SetDistancePerPulse(0.74495906);
+	lEncoder->Start();
+	rEncoder = new Encoder(Constants::encoderRightASlot, Constants::encoderRightAChannel,
+	                       Constants::encoderRightBSlot, Constants::encoderRightBChannel
+			              );
+	rEncoder->SetDistancePerPulse(0.74495906);
+	rEncoder->Start();
+	
+	lPidEncoder = new PidEncoder(lEncoder);
+	rPidEncoder = new PidEncoder(rEncoder);
+	
 	/*
 	cerr << "Loading Camera" << endl;
 	cam = new Camera();
@@ -81,7 +96,9 @@ void Robot2012::DisabledPeriodic (void)
 	output->update();
 	//cerr << "iIn Value: " << i.Get() << endl;
 	//cerr <<  "This is the throttle value: " << inputs->getShooterSpeed() << endl;
-	cam->enable();
+	//cam->enable();
+	
+	cerr << lPidEncoder->PIDGet() << " " << rPidEncoder->PIDGet() << endl;
 
 	/*
 	for(int x = 1; x < 13; x++)
@@ -119,11 +136,11 @@ void Robot2012::AutonomousInit(void)
 
 void Robot2012::AutonomousPeriodic (void)
 {	
-	if ( timer.Get() > 1.0 && Constants::autonomousShootingSpeed >= 0.0)
+	if ( timer.Get() > 0.5 && Constants::autonomousShootingSpeed >= 0.0)
 	{
 		elevator->setPosition(Elevator::shooting);
 	}
-	else if(timer.Get() > 1.0 && Constants::autonomousShootingSpeed < 0.0)
+	else if(timer.Get() > 3.0 && Constants::autonomousShootingSpeed < 0.0)
 	{
 		elevator->setPosition(Elevator::pooping);
 	}

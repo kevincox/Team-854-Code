@@ -60,6 +60,15 @@ namespace Constants
 	extern const double jsDriveDeadbandYMax;
 	extern const double jsDriveDeadbandYMin;
 
+	extern const UINT32 encoderLeftASlot;
+	extern const UINT32 encoderLeftAChannel;
+	extern const UINT32 encoderLeftBSlot;
+	extern const UINT32 encoderLeftBChannel;
+	extern const UINT32 encoderRightASlot;
+	extern const UINT32 encoderRightAChannel;
+	extern const UINT32 encoderRightBSlot;
+	extern const UINT32 encoderRightBChannel;
+
 	extern const double ballDiameter;
 	extern const double elevatorBallSpeed;
 	extern const double elevatorBallSpeediEnter;
